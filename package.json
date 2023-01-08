@@ -31,6 +31,7 @@
 	"dependencies": {
 		"clsx": "^1.2.1",
 		"google-spreadsheet": "^3.3.0",
+		"lru-cache": "^7.14.1",
 		"node-html-parser": "^6.1.4"
 	}
 }

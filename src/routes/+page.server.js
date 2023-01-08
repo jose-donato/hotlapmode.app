@@ -1,7 +1,12 @@
 import { getAutoSportDriverRatings } from '../utils/autosport';
 import { authenticateSheet, getSheetData } from '../utils/sheets';
+import cache from '../utils/cache';
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
+	const cached = cache.get('data');
+	if (cached) {
+		return cached;
+	}
 	const doc = await authenticateSheet();
 
 	const qualiSheet = doc.sheetsById[540387825];
@@ -24,10 +29,12 @@ export async function load() {
 
 	const autoSportScores = await getAutoSportDriverRatings();
 
-	return {
+	const data = {
 		autoSportScores,
 		quali,
 		drivers,
 		race
 	};
+	cache.set('data', data);
+	return data;
 }
