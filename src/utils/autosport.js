@@ -1,4 +1,4 @@
-import parse from 'node-html-parser';
+import { parse } from 'node-html-parser';
 
 /**
  * @returns {Promise<{reader: {rank: number, driver: string, score: string}[], autosport: {rank: number, driver: string, score: string}[]}>}
