@@ -30,7 +30,12 @@ export async function getSheetData(sheet) {
 	rows.forEach((row) => {
 		const value = {};
 		headerValues.forEach((header) => {
-			value[header] = row[header];
+			let newHeader =
+				header === 'AVG Laptime' ||
+				header === 'Quali Time (Lap Time of last Q session both participated in)'
+					? 'Circuit'
+					: header;
+			value[newHeader] = row[header];
 		});
 		values.push(value);
 	});

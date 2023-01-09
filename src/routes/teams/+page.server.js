@@ -1,9 +1,8 @@
-import { getAutoSportDriverRatings } from '../utils/autosport';
-import { authenticateSheet, getSheetData } from '../utils/sheets';
-import cache from '../utils/cache';
+import { authenticateSheet, getSheetData } from '../../utils/sheets';
+import cache from '../../utils/cache';
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
-	const cached = cache.get('data');
+	const cached = cache.get('data-teams');
 	if (cached) {
 		return cached;
 	}
@@ -12,19 +11,19 @@ export async function load() {
 	const qualiSheet = doc.sheetsByTitle['Quali In Detail'];
 	const raceSheet = doc.sheetsByTitle['Race In Detail'];
 	const driversSheet = doc.sheetsByTitle['Driver Details'];
+	const teamsSheet = doc.sheetsByTitle['Team Details'];
 
 	const drivers = await getSheetData(driversSheet);
 	const quali = await getSheetData(qualiSheet);
 	const race = await getSheetData(raceSheet);
-
-	const autoSportScores = await getAutoSportDriverRatings();
+	const teams = await getSheetData(teamsSheet);
 
 	const data = {
-		autoSportScores,
 		quali,
 		drivers,
-		race
+		race,
+		teams
 	};
-	cache.set('data', data);
+	cache.set('data-teams', data);
 	return data;
 }
