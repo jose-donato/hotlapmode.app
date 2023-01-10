@@ -7,6 +7,8 @@
 	/** @type {import('./$types').PageData} */
 	export let data;
 
+	console.log(data);
+
 	let circuits = data.quali.values.map((q) => q.Circuit);
 
 	circuits = circuits.slice(0, circuits.length - 1);
@@ -20,6 +22,8 @@
 		h2hRaceData = null,
 		h2hQualiData = null;
 
+	let sameTeamDriver = true;
+
 	$: {
 		driver1Found = {
 			driverData: data.drivers.values.find((driver) => driver.Driver === driver1),
@@ -31,13 +35,15 @@
 			qualiValues: getDriverQualiValues(data.quali.values, driver2),
 			raceValues: getDriverQualiValues(data.race.values, driver2)
 		};
+		sameTeamDriver = driver1Found.driverData.Team === driver2Found.driverData.Team;
+
 		h2hRaceData = circuits.map((circuit) => {
 			const driver1Laptime = driver1Found?.raceValues[circuit];
 			const driver2Laptime = driver2Found?.raceValues[circuit];
 			const difference =
 				driver1Laptime > 0 && driver2Laptime > 0
 					? (driver1Laptime / driver2Laptime - 1) * 100
-					: '0';
+					: '-';
 			return {
 				Circuit: circuit,
 				Driver1: {
@@ -78,7 +84,32 @@
 
 <div class="container mx-auto py-10">
 	<h2 class="uppercase font-bold tracking-widest mb-2 text-center">H2H Quali Performances</h2>
-	<div class="flex flex-col md:flex-row justify-center mb-4 gap-2">
+	<div class="flex flex-col md:flex-row justify-center mb-4 gap-8 relative">
+		{#if !sameTeamDriver}
+			<div
+				class="absolute top-0 right-0 w-32 h-full card flex items-center justify-center rounded flex-col"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width={1.5}
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+					/>
+				</svg>
+
+				<p class="text-sm text-center">
+					Disclaimer: Drivers are not from the same team. Some pace averages for Qualifying or Race
+					could be not accurate for comparison
+				</p>
+			</div>
+		{/if}
 		<div class="flex flex-col gap-2 card p-4 w-full md:w-80">
 			<label for="driver1">Driver 1</label>
 			<select id="driver1" bind:value={driver1}>

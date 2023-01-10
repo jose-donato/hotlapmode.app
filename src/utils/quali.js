@@ -7,9 +7,7 @@
 export function getDriverQualiValues(quali, driver) {
 	let qualiValues = {};
 	quali.forEach((circuit) => {
-		if (circuit[driver] !== 'none') {
-			qualiValues[circuit.Circuit] = parseFloat(circuit[driver]) || 0;
-		}
+		qualiValues[circuit.Circuit] = parseFloat(circuit[driver]) || circuit[driver];
 	});
 	return qualiValues;
 }
