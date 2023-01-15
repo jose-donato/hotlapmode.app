@@ -47,11 +47,48 @@
 		</p>
 		<p
 			class={clsx({
+				'text-green-500':
+					driverType === 'Driver 1'
+						? qualiPace.driver1Ahead.diff < 0
+						: qualiPace.driver2Ahead.diff < 0,
+				'text-red-500':
+					driverType === 'Driver 1'
+						? qualiPace.driver1Ahead.diff > 0
+						: qualiPace.driver2Ahead.diff > 0,
+				'text-white':
+					driverType === 'Driver 1'
+						? qualiPace.driver1Ahead.diff === 0
+						: qualiPace.driver2Ahead.diff === 0
+			})}
+		>
+			{driverType === 'Driver 1' ? qualiPace.driver1Ahead.amount : qualiPace.driver2Ahead.amount}
+		</p>
+
+		<p
+			class={clsx({
 				'text-green-500': driverType === racePace.fasterDriver,
 				'text-red-500': driverType !== racePace.fasterDriver
 			})}
 		>
 			{driverType === 'Driver 1' ? racePace.driver1 : racePace.driver2}%
+		</p>
+		<p
+			class={clsx({
+				'text-green-500':
+					driverType === 'Driver 1'
+						? racePace.driver1Ahead.diff < 0
+						: racePace.driver2Ahead.diff < 0,
+				'text-red-500':
+					driverType === 'Driver 1'
+						? racePace.driver1Ahead.diff > 0
+						: racePace.driver2Ahead.diff > 0,
+				'text-white':
+					driverType === 'Driver 1'
+						? racePace.driver1Ahead.diff === 0
+						: racePace.driver2Ahead.diff === 0
+			})}
+		>
+			{driverType === 'Driver 1' ? racePace.driver1Ahead.amount : racePace.driver2Ahead.amount}
 		</p>
 		<p
 			class={clsx({

@@ -91,31 +91,13 @@
 	const raceDriverValues = compareValues(raceDrivers[0], raceDrivers[1]);
 </script>
 
-<div class="relative flex justify-center card mt-10 p-4">
-	<div class="absolute top-2 right-2 flex gap-2">
-		{#if !sameTeamDriver}
-			<div
-				class="btn"
-				data-tooltip="Drivers are not from the same team. Some pace averages for Qualifying or Race
+<div class="absolute top-2 right-2 flex gap-2">
+	{#if !sameTeamDriver}
+		<div
+			class="btn"
+			data-tooltip="Drivers are not from the same team. Some pace averages for Qualifying or Race
                 could be not accurate for comparison"
-			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width={1.5}
-					stroke="currentColor"
-					class="w-6 h-6"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-					/>
-				</svg>
-			</div>
-		{/if}
-		<button class="btn">
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
@@ -127,41 +109,59 @@
 				<path
 					stroke-linecap="round"
 					stroke-linejoin="round"
-					d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"
+					d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
 				/>
 			</svg>
-		</button>
-	</div>
-	<Driver
-		driverType="Driver 1"
-		racePace={raceDriverValues}
-		qualiPace={qualiDriverValues}
-		driver={driver1Data}
-	/>
-	<div class="mx-10">
-		<div class="flex gap-10">
-			<img src={driver1Data.Image} class="w-20 h-20 object-cover" alt="driver 1" />
-			<div class="h-20 flex items-center justify-center flex-col">
-				<h1 class="text-center text-xl font-bold tracking-wide">hotlapmode.app</h1>
-				<h2 class="text-center">developed by jose-donato</h2>
-			</div>
-			<img src={driver2Data.Image} class="w-20 h-20 object-cover" alt="driver 2" />
 		</div>
-		<div class="text-center uppercase text-xl font-bold space-y-2">
-			<p>Media Rating</p>
-			<p>HLM Rating</p>
-			<p>Quali Pace</p>
-			<p>Race Pace</p>
-			<p>DNF's</p>
-			<p>Wins</p>
-			<p>Position</p>
-			<p>Points</p>
-		</div>
-	</div>
-	<Driver
-		driverType="Driver 2"
-		racePace={raceDriverValues}
-		qualiPace={qualiDriverValues}
-		driver={driver2Data}
-	/>
+	{/if}
+	<button class="btn">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke-width={1.5}
+			stroke="currentColor"
+			class="w-6 h-6"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"
+			/>
+		</svg>
+	</button>
 </div>
+<Driver
+	driverType="Driver 1"
+	racePace={raceDriverValues}
+	qualiPace={qualiDriverValues}
+	driver={driver1Data}
+/>
+<div class="mx-10">
+	<div class="flex gap-10">
+		<img src={driver1Data.Image} class="w-20 h-20 object-cover" alt="driver 1" />
+		<div class="h-20 flex items-center justify-center flex-col">
+			<h1 class="text-center text-xl font-bold tracking-wide">hotlapmode.app</h1>
+			<h2 class="text-center">developed by jose-donato</h2>
+		</div>
+		<img src={driver2Data.Image} class="w-20 h-20 object-cover" alt="driver 2" />
+	</div>
+	<div class="text-center uppercase text-xl font-bold space-y-2">
+		<p>Media Rating</p>
+		<p>HLM Rating</p>
+		<p>Quali Pace</p>
+		<p>H2H Quali</p>
+		<p>Race Pace</p>
+		<p>H2H Race</p>
+		<p>DNF's</p>
+		<p>Wins</p>
+		<p>Position</p>
+		<p>Points</p>
+	</div>
+</div>
+<Driver
+	driverType="Driver 2"
+	racePace={raceDriverValues}
+	qualiPace={qualiDriverValues}
+	driver={driver2Data}
+/>

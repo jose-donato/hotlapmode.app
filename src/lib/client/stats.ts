@@ -12,11 +12,18 @@ export function getDriverValues(data, driver1Name, driver2Name) {
 
 export function compareValues(data1, data2) {
 	const result = {};
+	let driver1Ahead = 0;
+	let driver2Ahead = 0;
 	let driver1DNFs = 0;
 	let driver2DNFs = 0;
 	Object.keys(data1).forEach((key) => {
 		// check if both are numbers
 		if (typeof data1[key] === 'number' && typeof data2[key] === 'number') {
+			if (data1[key] < data2[key]) {
+				driver1Ahead++;
+			} else {
+				driver2Ahead++;
+			}
 			const diff = data1[key] / data2[key] - 1;
 			result[key] = diff;
 		} else {
@@ -53,6 +60,14 @@ export function compareValues(data1, data2) {
 			amount: driver2DNFs,
 			percentage: ((driver2DNFs / Object.keys(data2).length) * 100).toFixed(2),
 			diff: driver2DNFs - driver1DNFs
+		},
+		driver1Ahead: {
+			amount: driver1Ahead,
+			diff: driver2Ahead - driver1Ahead
+		},
+		driver2Ahead: {
+			amount: driver2Ahead,
+			diff: driver1Ahead - driver2Ahead
 		}
 	};
 }

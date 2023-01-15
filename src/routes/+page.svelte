@@ -8,6 +8,12 @@
 	import Select from 'svelte-select';
 	import AdvancedComparison from '$lib/ui/AdvancedComparison.svelte';
 	import Comparison from '$lib/ui/Comparison.svelte';
+	import Tabs from '$lib/ui/Tabs/Tabs.svelte';
+	import TabList from '$lib/ui/Tabs/TabList.svelte';
+	import Tab from '$lib/ui/Tabs/Tab.svelte';
+	import TabPanel from '$lib/ui/Tabs/TabPanel.svelte';
+	import ComparisonQuali from '$lib/ui/ComparisonQuali.svelte';
+	import ComparisonRace from '$lib/ui/ComparisonRace.svelte';
 
 	let items = data.drivers.values.map((driver) => ({
 		value: driver.Driver,
@@ -28,7 +34,11 @@
 	let driver1: itemType;
 	let driver2: itemType;
 
+	//TODO: figure out when state it out of date
+
 	let unique = {};
+
+	let selectedId = 'h2h';
 </script>
 
 <div class="container mx-auto flex justify-center flex-col gap-6">
@@ -68,18 +78,58 @@
 		</div>
 	{/if}
 	<button class="btn mx-auto" on:click={() => (unique = {})}>Calculate</button>
-	<!--<Toggle label="Advanced View" bind:toggled={advancedView} />-->
-	{#if driver1 && driver2}
-		{#key unique}
-			<div>
-				<Comparison
-					qualiData={data.quali.values}
-					raceData={data.race.values}
-					driversData={data.drivers.values}
-					{driver1}
-					{driver2}
-				/>
-			</div>
-		{/key}
-	{/if}
+
+	<Tabs {selectedId}>
+		<TabList>
+			<Tab id="h2h">H2H Comparison</Tab>
+			<Tab id="quali">Quali Data</Tab>
+			<Tab id="race">Race Data</Tab>
+		</TabList>
+
+		<TabPanel id="h2h">
+			{#if driver1 && driver2}
+				{#key unique}
+					<Comparison
+						qualiData={data.quali.values}
+						raceData={data.race.values}
+						driversData={data.drivers.values}
+						{driver1}
+						{driver2}
+					/>
+				{/key}
+			{:else}
+				<h2>Please select two drivers to compare</h2>
+			{/if}
+		</TabPanel>
+
+		<TabPanel id="quali">
+			{#if driver1 && driver2}
+				{#key unique}
+					<ComparisonQuali
+						qualiData={data.quali.values}
+						driversData={data.drivers.values}
+						{driver1}
+						{driver2}
+					/>
+				{/key}
+			{:else}
+				<h2>Please select two drivers to compare</h2>
+			{/if}
+		</TabPanel>
+
+		<TabPanel id="race">
+			{#if driver1 && driver2}
+				{#key unique}
+					<ComparisonRace
+						raceData={data.race.values}
+						driversData={data.drivers.values}
+						{driver1}
+						{driver2}
+					/>
+				{/key}
+			{:else}
+				<h2>Please select two drivers to compare</h2>
+			{/if}
+		</TabPanel>
+	</Tabs>
 </div>

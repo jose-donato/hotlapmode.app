@@ -73,3 +73,25 @@
 	visibility: hidden;
 	opacity: 0;
 }
+
+.tab-item-animate {
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	width: calc(100% - 12px);
+	height: 32px;
+	transform-origin: 0 0;
+	transition: transform 0.25s;
+}
+
+.tabs .tabs-item:first-child.active ~ .tab-item-animate {
+	transform: translateX(0) scaleX(0.333);
+}
+
+.tabs .tabs-item:nth-child(2).active ~ .tab-item-animate {
+	transform: translateX(33.333%) scaleX(0.333);
+}
+
+.tabs .tabs-item:nth-child(3).active ~ .tab-item-animate {
+	transform: translateX(calc(33.333% * 2)) scaleX(0.333);
+}
