@@ -2,13 +2,12 @@
 	import { getDriverValues } from '$lib/client/stats';
 	import Chart from './Chart.svelte';
 	import Table from './Table.svelte';
-	export let qualiData;
-	export let driver1;
-	export let driver2;
-	export let driversData;
-	const circuits = qualiData.map((q) => q.Circuit);
+	export let team1;
+	export let team2;
+	export let teamsData;
+	const circuits = teamsData.map((q) => q.Circuit);
 
-	const qualiDrivers = getDriverValues(qualiData, driver1.value, driver2.value);
+	const qualiDrivers = getDriverValues(teamsData, team1.value, team2.value);
 	//const qualiDriverValues = compareValues(qualiDrivers[0], qualiDrivers[1]);
 
 	const h2hQualiData = circuits.map((circuit) => {
@@ -19,12 +18,12 @@
 
 		return {
 			Circuit: circuit,
-			Driver1: {
+			Team1: {
 				value: driver1Laptime,
 				color: typeof difference === 'number' ? (difference < 0 ? 'green' : 'red') : 'grey'
 			},
 			differenceValue: difference,
-			Driver2: {
+			Team2: {
 				value: driver2Laptime,
 				color: typeof difference === 'number' ? (difference > 0 ? 'green' : 'red') : 'grey'
 			},
@@ -44,13 +43,13 @@
 				})
 				.join('\n');
 
-			const headers = ['Circuit', driver1.value, driver2.value, 'Difference'].join(',');
+			const headers = ['Circuit', team1.value, team2.value, 'Difference'].join(',');
 			const csvWithHeaders = [headers, csv].join('\n');
 			const blob = new Blob([csvWithHeaders], { type: 'text/csv' });
 			const url = URL.createObjectURL(blob);
 			const a = document.createElement('a');
 			a.href = url;
-			a.download = `${driver1.value}-${driver2.value}-quali.csv`;
+			a.download = `${team1.value}-${team2.value}-race.csv`;
 			document.body.appendChild(a);
 			a.click();
 			document.body.removeChild(a);
@@ -74,7 +73,7 @@
 </div>
 
 <div class="grid grid-cols-2 w-full gap-2">
-	<Table columns={['Circuit', 'Driver1', 'Driver2', 'Difference']} rows={h2hQualiData} />
+	<Table columns={['Circuit', 'Team1', 'Team2', 'Difference']} rows={h2hQualiData} />
 	<Chart
 		data={{
 			labels: circuits,

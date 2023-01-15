@@ -82,6 +82,7 @@
 	height: 32px;
 	transform-origin: 0 0;
 	transition: transform 0.25s;
+	border-radius: 8px;
 }
 
 .tabs .tabs-item:first-child.active ~ .tab-item-animate {
@@ -94,4 +95,12 @@
 
 .tabs .tabs-item:nth-child(3).active ~ .tab-item-animate {
 	transform: translateX(calc(33.333% * 2)) scaleX(0.333);
+}
+
+.svelte-select-list {
+	z-index: 20 !important;
+}
+
+svg {
+	pointer-events: none;
 }

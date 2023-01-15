@@ -12,25 +12,25 @@
 	import TabPanel from '$lib/ui/Tabs/TabPanel.svelte';
 	import ComparisonQuali from '$lib/ui/ComparisonQuali.svelte';
 	import ComparisonRace from '$lib/ui/ComparisonRace.svelte';
+	import ComparisonTeamRace from '$lib/ui/ComparisonTeamRace.svelte';
+	import ComparisonTeam from '$lib/ui/ComparisonTeam.svelte';
 
-	let items = data.drivers.values.map((driver) => ({
-		value: driver.Driver,
-		label: driver['Full Name'],
-		group: driver['Team']
+	let items = data.teams.values.map((team) => ({
+		value: team.Team,
+		label: team['Full Team Name']
 	}));
 
 	type itemType = {
 		groupItem: boolean;
 		value: string;
 		label: string;
-		group: string;
 		selectable?: boolean;
 	};
 
 	const groupBy = (item: itemType) => item.group;
 
-	let driver1: itemType;
-	let driver2: itemType;
+	let team1: itemType;
+	let team2: itemType;
 
 	//TODO: figure out when state it out of date
 
@@ -42,97 +42,79 @@
 <div class="container mx-auto flex justify-center flex-col gap-6">
 	<div class="flex flex-col md:flex-row gap-4">
 		<div class="md:w-1/2 flex flex-col gap-2">
-			<label for="driver1">Driver 1</label>
+			<label for="team1">Team 1</label>
 			<Select
-				id="driver1"
-				placeholder="Select first driver to compare"
+				id="team1"
+				placeholder="Select first team to compare"
 				--background="#333333ff"
 				--list-background="#333333ff"
 				--item-active-background="#131313ff"
 				--item-hover-bg="#2a2a2aff"
 				{items}
 				{groupBy}
-				bind:value={driver1}
+				bind:value={team1}
 			/>
 		</div>
-		{#if driver1}
+		{#if team1}
 			<div transition:fade class="md:w-1/2 flex flex-col gap-2">
-				<label for="driver2">Driver 2</label>
+				<label for="team2">Team 2</label>
 				<Select
-					id="driver2"
+					id="team2"
 					--background="#333333ff"
 					--list-background="#333333ff"
 					--item-active-background="#131313ff"
 					--item-hover-bg="#2a2a2aff"
-					placeholder="Select second driver to compare"
+					placeholder="Select second team to compare"
 					items={items.map((item) => {
 						return {
 							...item,
-							selectable: driver1?.value !== item.value
+							selectable: team1?.value !== item.value
 						};
 					})}
 					{groupBy}
-					bind:value={driver2}
+					bind:value={team2}
 				/>
 			</div>
 		{/if}
 	</div>
 	<button
-		disabled={!driver1 || !driver2}
+		disabled={!team1 || !team2}
 		class="btn mx-auto px-2 py-1 disabled:pointer-events-none disabled:opacity-50"
 		on:click={() => (unique = {})}>Calculate</button
 	>
 
 	<Tabs {selectedId}>
 		<TabList>
-			<Tab tooltip="Overview between the two drivers" id="h2h">H2H Comparison</Tab>
-			<Tab tooltip="Qualification times for each driver per circuit" id="quali">Quali Data</Tab>
-			<Tab tooltip="Average race pace times for each driver per circuit" id="race">Race Data</Tab>
+			<Tab tooltip="Overview between the two teams" id="h2h">H2H Comparison</Tab>
+			<Tab tooltip="Qualification times for each team per circuit" id="quali">Quali Data</Tab>
+			<Tab tooltip="Average race pace times for each team per circuit" id="race">Race Data</Tab>
 		</TabList>
 
 		<TabPanel id="h2h">
-			{#if driver1 && driver2}
+			{#if team1 && team2}
 				{#key unique}
-					<Comparison
-						qualiData={data.quali.values}
-						raceData={data.race.values}
-						driversData={data.drivers.values}
-						{driver1}
-						{driver2}
-					/>
+					<ComparisonTeam teamsData={data.teams.values} {team1} {team2} />
 				{/key}
 			{:else}
-				<h2>Please select two drivers to compare</h2>
+				<h2>Please select two teams to compare</h2>
 			{/if}
 		</TabPanel>
 
 		<TabPanel id="quali">
-			{#if driver1 && driver2}
-				{#key unique}
-					<ComparisonQuali
-						qualiData={data.quali.values}
-						driversData={data.drivers.values}
-						{driver1}
-						{driver2}
-					/>
-				{/key}
+			{#if team1 && team2}
+				{#key unique}{/key}
 			{:else}
-				<h2>Please select two drivers to compare</h2>
+				<h2>Please select two teams to compare</h2>
 			{/if}
 		</TabPanel>
 
 		<TabPanel id="race">
-			{#if driver1 && driver2}
+			{#if team1 && team2}
 				{#key unique}
-					<ComparisonRace
-						raceData={data.race.values}
-						driversData={data.drivers.values}
-						{driver1}
-						{driver2}
-					/>
+					<ComparisonTeamRace teamsData={data.teamsRacePace.values} {team1} {team2} />
 				{/key}
 			{:else}
-				<h2>Please select two drivers to compare</h2>
+				<h2>Please select two teams to compare</h2>
 			{/if}
 		</TabPanel>
 	</Tabs>
