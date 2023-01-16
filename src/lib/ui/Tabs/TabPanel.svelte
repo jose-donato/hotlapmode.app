@@ -8,7 +8,7 @@
 </script>
 
 {#if $selectedTab === id}
-	<div class="relative flex justify-center card mt-10 p-4">
+	<div class="relative flex justify-center _card mt-10 p-4 max-h-[600px] overflow-y-auto">
 		<slot />
 	</div>
 {/if}

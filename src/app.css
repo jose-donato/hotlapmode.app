@@ -2,8 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+}
+
 @layer components {
-	.card {
+	._card {
 		@apply shadow-xl backdrop-filter backdrop-blur-xl  bg-base-300/80 border-white/10 rounded border;
 	}
 }
@@ -14,8 +17,4 @@
 
 svg {
 	pointer-events: none;
-}
-
-body {
-	overflow: hidden;
 }

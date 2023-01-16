@@ -126,23 +126,19 @@
 		</svg>
 	</button>
 </div>
-<div class="flex mx-auto">
+<div class="flex gap-4 items-center justify-between">
 	<Driver
 		driverType="Driver 1"
 		racePace={raceDriverValues}
 		qualiPace={qualiDriverValues}
 		driver={driver1Data}
 	/>
-	<div class="mx-10">
-		<div class="flex gap-10">
-			<img src={driver1Data.Image} class="w-20 h-20 object-cover" alt="driver 1" />
-			<div class="h-20 flex items-center justify-center flex-col">
-				<h1 class="text-center text-xl font-bold tracking-wide">hotlapmode.app</h1>
-				<h2 class="text-center">developed by jose-donato</h2>
-			</div>
-			<img src={driver2Data.Image} class="w-20 h-20 object-cover" alt="driver 2" />
+	<div class="lg:mx-10">
+		<div class="h-20 flex items-center justify-center flex-col pt-20">
+			<h1 class="text-center text-sm lg:text-lg font-bold tracking-wide">hotlapmode.app</h1>
+			<h2 class="text-center text-xs lg:text-base">developed by jose-donato</h2>
 		</div>
-		<div class="text-center uppercase text-xl font-bold space-y-2">
+		<div class="text-center uppercase text-sm lg:text-xl font-bold space-y-2 mt-20 lg:mt-20">
 			<p>Media Rating</p>
 			<p>HLM Rating</p>
 			<p>Quali Pace</p>

@@ -13,14 +13,15 @@
 	export let driverType;
 </script>
 
-<div class="w-72 flex flex-col justify-center items-center">
+<div class="lg:w-72 flex flex-col justify-center items-center">
+	<img src={driver.Image} class="w-20 h-20 object-cover" alt="driver 1" />
 	<div class="flex justify-center h-20 gap-10">
 		<div class="flex flex-col justify-center">
-			<h1 class="text-center text-xl font-bold tracking-wide">{driver['Full Name']}</h1>
+			<h1 class="text-center text-sm lg:text-xl font-bold tracking-wide">{driver['Full Name']}</h1>
 			<h2 class="text-center">{driver.Team}</h2>
 		</div>
 	</div>
-	<div class="text-center uppercase text-xl font-bold space-y-2">
+	<div class="text-center uppercase text-sm lg:text-xl font-bold space-y-2">
 		<p
 			class={clsx({
 				'text-green-500': driver.mediaRating.diff > 0,

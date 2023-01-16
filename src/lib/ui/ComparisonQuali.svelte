@@ -73,7 +73,7 @@
 	</button>
 </div>
 
-<div class="grid grid-cols-2 w-full gap-2">
+<div class="grid lg:grid-cols-2 w-full gap-2">
 	<Table columns={['Circuit', 'Driver1', 'Driver2', 'Difference']} rows={h2hQualiData} />
 	<Chart
 		data={{
