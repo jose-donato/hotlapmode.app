@@ -13,7 +13,10 @@
 	class="navbar shadow-lg backdrop-filter backdrop-blur-xl bg-base-300/80 z-50 border-b border-white/10"
 >
 	<div class="flex-1">
-		<a href="/" class="uppercase tracking-widest font-bold btn btn-ghost text-xl relative">
+		<a
+			href="/"
+			class="uppercase tracking-widest font-bold btn btn-ghost text-xl relative text-transparent bg-clip-text bg-gradient-to-r from-white to-primary"
+		>
 			HotLapMode
 		</a>
 	</div>
