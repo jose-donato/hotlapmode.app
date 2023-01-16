@@ -27,11 +27,27 @@
 		selectable?: boolean;
 	};
 
-	const groupBy = (item: itemType) => item.group;
+	const groups = items.reduce((acc, item) => {
+		const group = acc.find((g) => g.value === item.group);
+		if (group) {
+			group.items.push(item);
+		} else {
+			acc.push({
+				value: item.group,
+				label: item.group,
+				items: [item]
+			});
+		}
+		return acc;
+	}, []);
 
-	let driver1: itemType;
-	let driver2: itemType;
+	let driver1: string;
+	let driver2: string;
 
+	$: {
+		console.log(driver1);
+		console.log(driver2);
+	}
 	//TODO: figure out when state it out of date
 
 	let unique = {};
@@ -40,46 +56,46 @@
 </script>
 
 <div class="container mx-auto flex justify-center flex-col gap-6">
-	<div class="flex flex-col md:flex-row gap-4">
-		<div class="md:w-1/2 flex flex-col gap-2">
+	<div class="flex flex-col md:flex-row gap-4 mx-auto">
+		<div class="flex flex-col gap-2">
 			<label for="driver1">Driver 1</label>
-			<Select
-				id="driver1"
-				placeholder="Select first driver to compare"
-				--background="#333333ff"
-				--list-background="#333333ff"
-				--item-active-background="#131313ff"
-				--item-hover-bg="#2a2a2aff"
-				{items}
-				{groupBy}
-				bind:value={driver1}
-			/>
+			<select id="driver1" class="select select-bordered w-full max-w-xs" bind:value={driver1}>
+				<option disabled selected>Select first driver</option>
+				{#each groups as group}
+					<optgroup label={group.label}>
+						{#each group.items as item}
+							<option
+								disabled={driver2 && driver2.group === item.group && driver2.value === item.value}
+								value={item.value}>{item.label}</option
+							>
+						{/each}
+					</optgroup>
+				{/each}
+			</select>
 		</div>
-		{#if driver1}
-			<div transition:fade class="md:w-1/2 flex flex-col gap-2">
-				<label for="driver2">Driver 2</label>
-				<Select
-					id="driver2"
-					--background="#333333ff"
-					--list-background="#333333ff"
-					--item-active-background="#131313ff"
-					--item-hover-bg="#2a2a2aff"
-					placeholder="Select second driver to compare"
-					items={items.map((item) => {
-						return {
-							...item,
-							selectable: driver1?.value !== item.value
-						};
-					})}
-					{groupBy}
-					bind:value={driver2}
-				/>
-			</div>
-		{/if}
+		<div class="flex flex-col gap-2">
+			<label for="driver2">Driver 2</label>
+			<select id="driver2" class="select select-bordered w-full max-w-xs" bind:value={driver2}>
+				<option disabled selected>Select second driver</option>
+				{#each groups as group}
+					<optgroup label={group.label}>
+						{#each group.items as item}
+							<option
+								disabled={driver1 && driver1.group === item.group && driver1.value === item.value}
+								value={item.value}>{item.label}</option
+							>
+						{/each}
+					</optgroup>
+				{/each}
+			</select>
+		</div>
 	</div>
 	<button
-		disabled={!driver1 || !driver2}
-		class="btn mx-auto px-2 py-1 disabled:pointer-events-none disabled:opacity-50"
+		disabled={driver1 === undefined ||
+			driver2 === undefined ||
+			driver1 === 'Select first driver' ||
+			driver2 === 'Select second driver'}
+		class="btn mx-auto disabled:pointer-events-none disabled:opacity-50"
 		on:click={() => (unique = {})}>Calculate</button
 	>
 
@@ -91,7 +107,7 @@
 		</TabList>
 
 		<TabPanel id="h2h">
-			{#if driver1 && driver2}
+			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
 				{#key unique}
 					<Comparison
 						qualiData={data.quali.values}
@@ -107,7 +123,7 @@
 		</TabPanel>
 
 		<TabPanel id="quali">
-			{#if driver1 && driver2}
+			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
 				{#key unique}
 					<ComparisonQuali
 						qualiData={data.quali.values}
@@ -122,7 +138,7 @@
 		</TabPanel>
 
 		<TabPanel id="race">
-			{#if driver1 && driver2}
+			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
 				{#key unique}
 					<ComparisonRace
 						raceData={data.race.values}

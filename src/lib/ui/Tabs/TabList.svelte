@@ -1,4 +1,3 @@
-<div class="flex rounded relative tabs bg-grey-800">
+<div class="tabs tabs-boxed w-fit mx-auto">
 	<slot />
-	<span class={'tab-item-animate rounded bg-grey-600/20'} />
 </div>

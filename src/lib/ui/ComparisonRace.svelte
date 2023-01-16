@@ -1,14 +1,14 @@
-<script>
+<script lang="ts">
 	import { getDriverValues } from '$lib/client/stats';
 	import Chart from './Chart.svelte';
 	import Table from './Table.svelte';
 	export let raceData;
-	export let driver1;
-	export let driver2;
+	export let driver1: string;
+	export let driver2: string;
 	export let driversData;
 	const circuits = raceData.map((q) => q.Circuit);
 
-	const qualiDrivers = getDriverValues(raceData, driver1.value, driver2.value);
+	const qualiDrivers = getDriverValues(raceData, driver1, driver2);
 	//const qualiDriverValues = compareValues(qualiDrivers[0], qualiDrivers[1]);
 
 	const h2hQualiData = circuits.map((circuit) => {
@@ -35,22 +35,22 @@
 
 <div class="absolute top-2 right-2 flex gap-2">
 	<button
-		class="btn"
+		class="btn btn-square z-10"
 		on:click={() => {
 			const csv = h2hQualiData
 				.filter((row) => row.Circuit !== 'TOTAL')
 				.map((row) => {
-					return [row.Circuit, row.Driver1.value, row.Driver2.value, row.Difference].join(',');
+					return [row.Circuit, row.driver1, row.driver2, row.Difference].join(',');
 				})
 				.join('\n');
 
-			const headers = ['Circuit', driver1.value, driver2.value, 'Difference'].join(',');
+			const headers = ['Circuit', driver1, driver2, 'Difference'].join(',');
 			const csvWithHeaders = [headers, csv].join('\n');
 			const blob = new Blob([csvWithHeaders], { type: 'text/csv' });
 			const url = URL.createObjectURL(blob);
 			const a = document.createElement('a');
 			a.href = url;
-			a.download = `${driver1.value}-${driver2.value}-race.csv`;
+			a.download = `${driver1}-${driver2}-race.csv`;
 			document.body.appendChild(a);
 			a.click();
 			document.body.removeChild(a);

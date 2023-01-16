@@ -59,7 +59,7 @@
 </script>
 
 <div class="absolute top-2 right-2 flex gap-2">
-	<button class="btn">
+	<button class="btn btn-square">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"

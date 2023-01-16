@@ -2,23 +2,16 @@
 	import { compareValues, getDriverValues } from '$lib/client/stats';
 	import Driver from './Driver.svelte';
 
-	type driverType = {
-		groupItem: boolean;
-		value: string;
-		label: string;
-		group: string;
-		selectable?: boolean;
-	};
-	export let driver1: driverType;
-	export let driver2: driverType;
+	export let driver1: string;
+	export let driver2: string;
 
 	export let driversData;
 	export let qualiData;
 	export let raceData;
 
-	const getDrivers = (driver1: driverType, driver2: driverType) => {
+	const getDrivers = (driver1: string, driver2: string) => {
 		const drivers = driversData.filter((driver) => {
-			return driver.Driver === driver1.value || driver.Driver === driver2.value;
+			return driver.Driver === driver1 || driver.Driver === driver2;
 		});
 
 		let driver1Data = drivers[0];
@@ -85,36 +78,38 @@
 
 	const sameTeamDriver = driver1Data.Team === driver2Data.Team;
 
-	const qualiDrivers = getDriverValues(qualiData, driver1.value, driver2.value);
+	const qualiDrivers = getDriverValues(qualiData, driver1, driver2);
 	const qualiDriverValues = compareValues(qualiDrivers[0], qualiDrivers[1]);
-	const raceDrivers = getDriverValues(raceData, driver1.value, driver2.value);
+	const raceDrivers = getDriverValues(raceData, driver1, driver2);
 	const raceDriverValues = compareValues(raceDrivers[0], raceDrivers[1]);
 </script>
 
 <div class="absolute top-2 right-2 flex gap-2">
 	{#if !sameTeamDriver}
 		<div
-			class="btn"
-			data-tooltip="Drivers are not from the same team. Some pace averages for Qualifying or Race
-                could be not accurate for comparison"
+			class="tooltip"
+			data-tip="Drivers are not from the same team. Some pace averages for Qualifying or Race
+	could be not accurate for comparison"
 		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke-width={1.5}
-				stroke="currentColor"
-				class="w-6 h-6"
-			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-				/>
-			</svg>
+			<div class="btn btn-square">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width={1.5}
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+					/>
+				</svg>
+			</div>
 		</div>
 	{/if}
-	<button class="btn">
+	<button class="btn btn-square">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
@@ -131,37 +126,39 @@
 		</svg>
 	</button>
 </div>
-<Driver
-	driverType="Driver 1"
-	racePace={raceDriverValues}
-	qualiPace={qualiDriverValues}
-	driver={driver1Data}
-/>
-<div class="mx-10">
-	<div class="flex gap-10">
-		<img src={driver1Data.Image} class="w-20 h-20 object-cover" alt="driver 1" />
-		<div class="h-20 flex items-center justify-center flex-col">
-			<h1 class="text-center text-xl font-bold tracking-wide">hotlapmode.app</h1>
-			<h2 class="text-center">developed by jose-donato</h2>
+<div class="flex mx-auto">
+	<Driver
+		driverType="Driver 1"
+		racePace={raceDriverValues}
+		qualiPace={qualiDriverValues}
+		driver={driver1Data}
+	/>
+	<div class="mx-10">
+		<div class="flex gap-10">
+			<img src={driver1Data.Image} class="w-20 h-20 object-cover" alt="driver 1" />
+			<div class="h-20 flex items-center justify-center flex-col">
+				<h1 class="text-center text-xl font-bold tracking-wide">hotlapmode.app</h1>
+				<h2 class="text-center">developed by jose-donato</h2>
+			</div>
+			<img src={driver2Data.Image} class="w-20 h-20 object-cover" alt="driver 2" />
 		</div>
-		<img src={driver2Data.Image} class="w-20 h-20 object-cover" alt="driver 2" />
+		<div class="text-center uppercase text-xl font-bold space-y-2">
+			<p>Media Rating</p>
+			<p>HLM Rating</p>
+			<p>Quali Pace</p>
+			<p>H2H Quali</p>
+			<p>Race Pace</p>
+			<p>H2H Race</p>
+			<p>DNF's</p>
+			<p>Wins</p>
+			<p>Position</p>
+			<p>Points</p>
+		</div>
 	</div>
-	<div class="text-center uppercase text-xl font-bold space-y-2">
-		<p>Media Rating</p>
-		<p>HLM Rating</p>
-		<p>Quali Pace</p>
-		<p>H2H Quali</p>
-		<p>Race Pace</p>
-		<p>H2H Race</p>
-		<p>DNF's</p>
-		<p>Wins</p>
-		<p>Position</p>
-		<p>Points</p>
-	</div>
+	<Driver
+		driverType="Driver 2"
+		racePace={raceDriverValues}
+		qualiPace={qualiDriverValues}
+		driver={driver2Data}
+	/>
 </div>
-<Driver
-	driverType="Driver 2"
-	racePace={raceDriverValues}
-	qualiPace={qualiDriverValues}
-	driver={driver2Data}
-/>
