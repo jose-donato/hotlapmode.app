@@ -11,7 +11,7 @@
 	<div class="text-center text-white text-sm">No data</div>
 {:else}
 	<div class="overflow-x-auto">
-		<table class="table table-zebra w-full">
+		<table class="table table-zebra table-compact w-full">
 			<thead>
 				<tr>
 					{#each columns as column}

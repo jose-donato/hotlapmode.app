@@ -91,7 +91,7 @@
 			data-tip="Drivers are not from the same team. Some pace averages for Qualifying or Race
 	could be not accurate for comparison"
 		>
-			<div class="btn btn-square">
+			<div class="_icon-btn">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -109,7 +109,7 @@
 			</div>
 		</div>
 	{/if}
-	<button class="btn btn-square">
+	<button class="_icon-btn">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"

@@ -15,7 +15,7 @@
 	<div class="flex-1">
 		<a
 			href="/"
-			class="uppercase tracking-widest font-bold btn btn-ghost text-xl relative text-transparent bg-clip-text bg-gradient-to-r from-white to-primary"
+			class="uppercase tracking-widest font-bold btn btn-ghost text-xl relative text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-500"
 		>
 			HotLapMode
 		</a>
@@ -61,31 +61,26 @@
 		</ul>
 	</div>
 </header>
-<main class="w-[90%] md:w-full mx-auto pt-10 min-h-[70vh]">
+<main class="w-[95%] md:w-full mx-auto pt-10 min-h-[70vh]">
 	<slot />
 </main>
-<!--<footer
-	class="fixed bottom-0 w-full flex justify-center items-center gap-4 border-t shadow-lg backdrop-filter backdrop-blur-xl bg-base-300/80 z-50 border-white/10 py-1"
->
-	<p class="text-xs">
-		This website was made in a collaborative effort by <a
-			class="underline"
-			href="https://twitter.com/josedonato__">@jose-donato</a
-		>
-		and
-		<a class="underline" href="https://twitter.com/hotlapmode">@hotlapmode</a>.
-	</p>
-</footer>-->
 <footer class="footer footer-center p-10 text-base-content">
 	<div>
 		<p class="font-bold">hotlapmode.app</p>
 		<p class="">
 			This website was made in a collaborative effort by <a
+				target="_blank"
+				rel="noopener noreferrer"
 				class="underline"
 				href="https://twitter.com/josedonato__">@jose-donato</a
 			>
 			and
-			<a class="underline" href="https://twitter.com/hotlapmode">@hotlapmode</a>.
+			<a
+				target="_blank"
+				rel="noopener noreferrer"
+				class="underline"
+				href="https://twitter.com/hotlapmode">@hotlapmode</a
+			>.
 		</p>
 		<p>Copyright © 2023 - All right reserved</p>
 	</div>

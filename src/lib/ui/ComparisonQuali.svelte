@@ -35,7 +35,7 @@
 
 <div class="absolute top-2 right-2 flex gap-2">
 	<button
-		class="btn btn-square z-10"
+		class="_icon-btn z-10"
 		on:click={() => {
 			const csv = h2hQualiData
 				.filter((row) => row.Circuit !== 'TOTAL')
