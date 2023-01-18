@@ -4,7 +4,6 @@
 
 	export let data: PageServerData;
 
-	import Select from 'svelte-select';
 	import Comparison from '$lib/ui/Comparison.svelte';
 	import Tabs from '$lib/ui/Tabs/Tabs.svelte';
 	import TabList from '$lib/ui/Tabs/TabList.svelte';
@@ -43,37 +42,10 @@
 	<div class="flex flex-col md:flex-row gap-4">
 		<div class="md:w-1/2 flex flex-col gap-2">
 			<label for="team1">Team 1</label>
-			<Select
-				id="team1"
-				placeholder="Select first team to compare"
-				--background="#333333ff"
-				--list-background="#333333ff"
-				--item-active-background="#131313ff"
-				--item-hover-bg="#2a2a2aff"
-				{items}
-				{groupBy}
-				bind:value={team1}
-			/>
 		</div>
 		{#if team1}
 			<div transition:fade class="md:w-1/2 flex flex-col gap-2">
 				<label for="team2">Team 2</label>
-				<Select
-					id="team2"
-					--background="#333333ff"
-					--list-background="#333333ff"
-					--item-active-background="#131313ff"
-					--item-hover-bg="#2a2a2aff"
-					placeholder="Select second team to compare"
-					items={items.map((item) => {
-						return {
-							...item,
-							selectable: team1?.value !== item.value
-						};
-					})}
-					{groupBy}
-					bind:value={team2}
-				/>
 			</div>
 		{/if}
 	</div>
