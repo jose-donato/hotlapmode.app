@@ -75,6 +75,8 @@
 <div class="grid grid-cols-2 w-full gap-2">
 	<Table columns={['Circuit', 'Team1', 'Team2', 'Difference']} rows={h2hQualiData} />
 	<Chart
+		info="Values obtained through the pace of the best driver for every team"
+		info2="Quali Values obtained through the best sector times of the best driver for every team"
 		data={{
 			labels: circuits,
 			datasets: [

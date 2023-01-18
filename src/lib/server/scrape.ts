@@ -61,7 +61,6 @@ export async function getTeamStandings(): Promise<
 	const text = await html.text();
 	const root = parse(text);
 	const table = root.querySelector('.resultsarchive-table');
-	console.log(table);
 	const rows = table.querySelectorAll('tr');
 	const teamStandings = [];
 	rows.forEach((row, idx) => {

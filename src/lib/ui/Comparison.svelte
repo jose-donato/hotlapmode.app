@@ -5,110 +5,31 @@
 	export let driver1: string;
 	export let driver2: string;
 
-	export let driversData;
 	export let qualiData;
 	export let raceData;
-
-	const getDrivers = (driver1: string, driver2: string) => {
-		const drivers = driversData.filter((driver) => {
-			return driver.Driver === driver1 || driver.Driver === driver2;
-		});
-
-		let driver1Data = drivers[0];
-		let driver2Data = drivers[1];
-
-		// get "HLM Rating" and compare between drivers
-		let driver1HLM = parseFloat(driver1Data['HLM Rating']);
-		let driver2HLM = parseFloat(driver2Data['HLM Rating']);
-		let driver1Media = parseFloat(driver1Data['Media Rating']);
-		let driver2Media = parseFloat(driver2Data['Media Rating']);
-		console.log(driver2Data);
-		driver1Data = {
-			...driver1Data,
-			hlmRating: {
-				value: driver1HLM,
-				diff: driver1HLM - driver2HLM
-			},
-			mediaRating: {
-				value: driver1Media,
-				diff: driver1Media - driver2Media
-			},
-			points: {
-				value: driver1Data['points'],
-				diff: driver1Data['points'] - driver2Data['points']
-			},
-			wins: {
-				value: driver1Data['wins'],
-				diff: driver1Data['wins'] - driver2Data['wins']
-			},
-			position: {
-				value: driver1Data['position'],
-				diff: driver2Data['position'] - driver1Data['position']
-			}
-		};
-
-		driver2Data = {
-			...driver2Data,
-			hlmRating: {
-				value: driver2HLM,
-				diff: driver2HLM - driver1HLM
-			},
-			mediaRating: {
-				value: driver2Media,
-				diff: driver2Media - driver1Media
-			},
-			points: {
-				value: driver2Data['points'],
-				diff: driver2Data['points'] - driver1Data['points'].value
-			},
-			wins: {
-				value: driver2Data['wins'],
-				diff: driver2Data['wins'] - driver1Data['wins'].value
-			},
-			position: {
-				value: driver2Data['position'],
-				diff: driver1Data['position'].value - driver2Data['position']
-			}
-		};
-
-		return { driver1Data, driver2Data };
-	};
-
-	const { driver1Data, driver2Data } = getDrivers(driver1, driver2);
-
-	const sameTeamDriver = driver1Data.Team === driver2Data.Team;
+	export let sameTeamDriver: string;
+	export let driver1Data;
+	export let driver2Data;
 
 	const qualiDrivers = getDriverValues(qualiData, driver1, driver2);
-	const qualiDriverValues = compareValues(qualiDrivers[0], qualiDrivers[1]);
+	const qualiDriverValues = compareValues(
+		qualiDrivers[0],
+		qualiDrivers[1],
+		qualiDrivers[2],
+		driver1,
+		driver2
+	);
 	const raceDrivers = getDriverValues(raceData, driver1, driver2);
-	const raceDriverValues = compareValues(raceDrivers[0], raceDrivers[1]);
+	const raceDriverValues = compareValues(
+		raceDrivers[0],
+		raceDrivers[1],
+		qualiDrivers[2],
+		driver1,
+		driver2
+	);
 </script>
 
 <div class="absolute top-2 right-2 flex gap-2">
-	{#if !sameTeamDriver}
-		<div
-			class="tooltip"
-			data-tip="Drivers are not from the same team. Some pace averages for Qualifying or Race
-	could be not accurate for comparison"
-		>
-			<div class="_icon-btn">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width={1.5}
-					stroke="currentColor"
-					class="w-6 h-6"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-					/>
-				</svg>
-			</div>
-		</div>
-	{/if}
 	<button class="_icon-btn">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -128,15 +49,28 @@
 </div>
 <div class="flex gap-4 items-center justify-between">
 	<Driver
-		driverType="Driver 1"
-		racePace={raceDriverValues}
-		qualiPace={qualiDriverValues}
+		qualiPaceDriver={qualiDriverValues.driver1}
+		racePaceDriver={raceDriverValues.driver1}
 		driver={driver1Data}
 	/>
 	<div class="lg:mx-10">
 		<div class="h-20 flex items-center justify-center flex-col pt-20">
-			<h1 class="text-center text-sm lg:text-lg font-bold tracking-wide">hotlapmode.app</h1>
-			<h2 class="text-center text-xs lg:text-base">developed by jose-donato</h2>
+			<a
+				href="/"
+				class="lowercase font-bold btn btn-ghost text-xl relative text-transparent bg-clip-text bg-gradient-to-r from-white to-primary"
+			>
+				hotlapmode.app
+			</a>
+			<h2 class="text-center text-xs lg:text-base">
+				developed by <a
+					target="_blank"
+					rel="noopener noreferrer"
+					class="underline"
+					href="https://twitter.com/josedonato__"
+				>
+					@jose-donato
+				</a>
+			</h2>
 		</div>
 		<div class="text-center uppercase text-sm lg:text-xl font-bold space-y-2 mt-20 lg:mt-20">
 			<p>Media Rating</p>
@@ -152,9 +86,8 @@
 		</div>
 	</div>
 	<Driver
-		driverType="Driver 2"
-		racePace={raceDriverValues}
-		qualiPace={qualiDriverValues}
+		qualiPaceDriver={qualiDriverValues.driver2}
+		racePaceDriver={raceDriverValues.driver2}
 		driver={driver2Data}
 	/>
 </div>

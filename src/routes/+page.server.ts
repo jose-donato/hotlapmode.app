@@ -4,10 +4,10 @@ import { authenticateSheet, getSheetData } from '$lib/server/sheets';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ params }) => {
-	const cached = cache.get('data');
+	/*const cached = cache.get('data');
 	if (cached) {
 		return cached;
-	}
+	}*/
 	const doc = await authenticateSheet();
 	const driversSheet = doc.sheetsByTitle['Driver Details'];
 

@@ -8,9 +8,8 @@
 		Team: string;
 	};
 	export let driver: driverType;
-	export let qualiPace;
-	export let racePace;
-	export let driverType;
+	export let qualiPaceDriver;
+	export let racePaceDriver;
 </script>
 
 <div class="lg:w-72 flex flex-col justify-center items-center">
@@ -40,70 +39,47 @@
 		</p>
 		<p
 			class={clsx({
-				'text-green-500': driverType === qualiPace.fasterDriver,
-				'text-red-500': driverType !== qualiPace.fasterDriver
+				'text-green-500': qualiPaceDriver.ahead.diff < 0,
+				'text-red-500': qualiPaceDriver.ahead.diff > 0
 			})}
 		>
-			{driverType === 'Driver 1' ? qualiPace.driver1 : qualiPace.driver2}%
+			{qualiPaceDriver.avg}%
 		</p>
 		<p
 			class={clsx({
-				'text-green-500':
-					driverType === 'Driver 1'
-						? qualiPace.driver1Ahead.diff < 0
-						: qualiPace.driver2Ahead.diff < 0,
-				'text-red-500':
-					driverType === 'Driver 1'
-						? qualiPace.driver1Ahead.diff > 0
-						: qualiPace.driver2Ahead.diff > 0,
-				'text-white':
-					driverType === 'Driver 1'
-						? qualiPace.driver1Ahead.diff === 0
-						: qualiPace.driver2Ahead.diff === 0
+				'text-green-500': qualiPaceDriver.ahead.diff < 0,
+				'text-red-500': qualiPaceDriver.ahead.diff > 0,
+				'text-white': qualiPaceDriver.ahead.diff === 0
 			})}
 		>
-			{driverType === 'Driver 1' ? qualiPace.driver1Ahead.amount : qualiPace.driver2Ahead.amount}
+			{qualiPaceDriver.ahead.amount}
 		</p>
 
 		<p
 			class={clsx({
-				'text-green-500': driverType === racePace.fasterDriver,
-				'text-red-500': driverType !== racePace.fasterDriver
+				'text-green-500': racePaceDriver.ahead.diff < 0,
+				'text-red-500': racePaceDriver.ahead.diff > 0
 			})}
 		>
-			{driverType === 'Driver 1' ? racePace.driver1 : racePace.driver2}%
+			{racePaceDriver.avg}%
 		</p>
 		<p
 			class={clsx({
-				'text-green-500':
-					driverType === 'Driver 1'
-						? racePace.driver1Ahead.diff < 0
-						: racePace.driver2Ahead.diff < 0,
-				'text-red-500':
-					driverType === 'Driver 1'
-						? racePace.driver1Ahead.diff > 0
-						: racePace.driver2Ahead.diff > 0,
-				'text-white':
-					driverType === 'Driver 1'
-						? racePace.driver1Ahead.diff === 0
-						: racePace.driver2Ahead.diff === 0
+				'text-green-500': racePaceDriver.ahead.diff < 0,
+				'text-red-500': racePaceDriver.ahead.diff > 0,
+				'text-white': racePaceDriver.ahead.diff === 0
 			})}
 		>
-			{driverType === 'Driver 1' ? racePace.driver1Ahead.amount : racePace.driver2Ahead.amount}
+			{racePaceDriver.ahead.amount}
 		</p>
 		<p
 			class={clsx({
-				'text-green-500':
-					driverType === 'Driver 1' ? racePace.driver1DNFs.diff < 0 : racePace.driver2DNFs.diff < 0,
-				'text-red-500':
-					driverType === 'Driver 1' ? racePace.driver1DNFs.diff > 0 : racePace.driver2DNFs.diff > 0,
-				'text-white':
-					driverType === 'Driver 1'
-						? racePace.driver1DNFs.diff === 0
-						: racePace.driver2DNFs.diff === 0
+				'text-green-500': racePaceDriver.dnfs.diff < 0,
+				'text-red-500': racePaceDriver.dnfs.diff > 0,
+				'text-white': racePaceDriver.dnfs.diff === 0
 			})}
 		>
-			{driverType === 'Driver 1' ? racePace.driver1DNFs.amount : racePace.driver2DNFs.amount}
+			{racePaceDriver.dnfs.amount}
 		</p>
 		<p
 			class={clsx({

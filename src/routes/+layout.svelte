@@ -9,15 +9,25 @@
 	$: path = $page.url.pathname;
 </script>
 
+<div class="absolute inset-0 -z-10 mx-0 max-w-none overflow-hidden">
+	<div
+		class="absolute left-1/2 top-0 ml-[-38rem] h-[25rem] w-[81.25rem] dark:[mask-image:linear-gradient(white,transparent)]"
+	>
+		<div
+			class="absolute inset-0 bg-gradient-to-r [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] from-white/30 to-primary/30 opacity-100"
+		/>
+	</div>
+</div>
+
 <header
-	class="navbar shadow-lg backdrop-filter backdrop-blur-xl bg-base-300/80 z-50 border-b border-white/10"
+	class="navbar shadow-lg backdrop-filter backdrop-blur-xl bg-base-300/20 z-50 border-b border-white/10"
 >
 	<div class="flex-1">
 		<a
 			href="/"
-			class="uppercase tracking-widest font-bold btn btn-ghost text-xl relative text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-500"
+			class="lowercase font-bold btn btn-ghost text-xl relative text-transparent bg-clip-text bg-gradient-to-r from-white to-primary"
 		>
-			HotLapMode
+			hotlapmode.app
 		</a>
 	</div>
 	<div class="flex-none">
@@ -66,7 +76,12 @@
 </main>
 <footer class="footer footer-center p-10 text-base-content">
 	<div>
-		<p class="font-bold">hotlapmode.app</p>
+		<a
+			href="/"
+			class="lowercase font-bold btn btn-ghost text-xl relative text-transparent bg-clip-text bg-gradient-to-r from-white to-primary"
+		>
+			hotlapmode.app
+		</a>
 		<p class="">
 			This website was made in a collaborative effort by <a
 				target="_blank"

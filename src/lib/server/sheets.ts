@@ -32,6 +32,9 @@ export async function getSheetData(sheet: GoogleSpreadsheetWorksheet) {
 		});
 		values.push(value);
 	});
+	if (values[values.length - 1].Circuit === 'TOTAL') {
+		values.pop();
+	}
 	return {
 		values,
 		headerValues

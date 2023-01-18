@@ -18,9 +18,5 @@ module.exports = {
 			}
 		}
 	},
-	plugins: [require('daisyui')],
-	daisyui: {
-		themes: true,
-		darkTheme: 'business'
-	}
+	plugins: [require('daisyui')]
 };

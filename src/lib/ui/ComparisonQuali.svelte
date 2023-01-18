@@ -76,6 +76,7 @@
 <div class="grid lg:grid-cols-2 w-full gap-2">
 	<Table columns={['Circuit', 'Driver1', 'Driver2', 'Difference']} rows={h2hQualiData} />
 	<Chart
+		info="Values calculated through comparison with teammate in last Q session both took part in"
 		data={{
 			labels: circuits,
 			datasets: [
