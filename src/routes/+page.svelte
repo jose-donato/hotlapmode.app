@@ -7,7 +7,6 @@
 	import TabList from '$lib/ui/Tabs/TabList.svelte';
 	import Tab from '$lib/ui/Tabs/Tab.svelte';
 	import TabPanel from '$lib/ui/Tabs/TabPanel.svelte';
-	import ComparisonQuali from '$lib/ui/ComparisonQuali.svelte';
 	import ComparisonRace from '$lib/ui/ComparisonRace.svelte';
 	import { fade } from 'svelte/transition';
 
@@ -196,8 +195,8 @@
 
 		<TabPanel id="quali">
 			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
-				<ComparisonQuali
-					qualiData={data.quali.values}
+				<ComparisonRace
+					raceData={data.quali.values}
 					driversData={data.drivers.values}
 					{driver1}
 					{driver2}

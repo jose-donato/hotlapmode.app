@@ -6,6 +6,7 @@
 	export let driver1: string;
 	export let driver2: string;
 	export let driversData;
+	export let type = 'quali';
 	const circuits = raceData.map((q) => q.Circuit);
 
 	const qualiDrivers = getDriverValues(raceData, driver1, driver2);
@@ -37,12 +38,21 @@
 <div class="grid lg:grid-cols-2 w-full gap-2">
 	<Table columns={['Circuit', driver1, driver2, 'Difference']} rows={h2hQualiData} />
 	<Chart
-		info="Values calculated through FastF1 with an automized code for all drivers"
+		info={type === 'race'
+			? 'Values calculated through FastF1 with an automized code for all drivers'
+			: 'Values calculated through comparison with teammate in last Q session both took part in'}
 		data={{
 			labels: circuits,
 			datasets: [
 				{
-					values: h2hQualiData ? h2hQualiData.map((row) => row.differenceValue) : []
+					fill: true,
+					lineTension: 0.3,
+					backgroundColor: '#F28C18',
+					borderColor: '#F28C18',
+					borderCapStyle: 'butt',
+					pointBackgroundColor: '#fff',
+					label: `${driver1} vs ${driver2} - ${type} % Difference`,
+					data: h2hQualiData ? h2hQualiData.map((row) => row.differenceValue) : []
 				}
 			]
 		}}

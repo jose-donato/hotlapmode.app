@@ -75,7 +75,7 @@
 	</button>
 </div>
 
-<div class="grid grid-cols-2 w-full gap-2">
+<div class="grid lg:grid-cols-2 w-full gap-2">
 	<Table columns={['Circuit', team1, team2, 'Difference']} rows={h2hQualiData} />
 	<Chart
 		info={type === 'race'
@@ -85,7 +85,8 @@
 			labels: circuits,
 			datasets: [
 				{
-					values: h2hQualiData ? h2hQualiData.map((row) => row.differenceValue) : []
+					label: `${team1} vs ${team2} - ${type} % Difference`,
+					data: h2hQualiData ? h2hQualiData.map((row) => row.differenceValue) : []
 				}
 			]
 		}}
