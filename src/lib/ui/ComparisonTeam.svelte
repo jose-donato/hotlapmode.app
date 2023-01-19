@@ -1,28 +1,29 @@
 <script lang="ts">
-	import { compareValues, getDriverValues } from '$lib/client/stats';
+	import {
+		compareTeamValues,
+		compareValues,
+		getDriverValues,
+		getTeamValues
+	} from '$lib/client/stats';
 	import Export from './Export.svelte';
 	import Team from './Team.svelte';
 	import { toPng } from 'html-to-image';
 
+	export let team1: string;
+	export let team2: string;
+
 	export let team1Data;
 	export let team2Data;
 
-	/*const qualiDrivers = getDriverValues(qualiData, driver1, driver2);
-	const qualiDriverValues = compareValues(
-		qualiDrivers[0],
-		qualiDrivers[1],
-		qualiDrivers[2],
-		driver1,
-		driver2
-	);
-	const raceDrivers = getDriverValues(raceData, driver1, driver2);
-	const raceDriverValues = compareValues(
-		raceDrivers[0],
-		raceDrivers[1],
-		qualiDrivers[2],
-		driver1,
-		driver2
-	);*/
+	export let qualiData;
+	export let raceData;
+
+	const qualiTeams = getTeamValues(qualiData, team1, team2);
+
+	const qualiTeamsValues = compareTeamValues(qualiTeams[0], qualiTeams[1]);
+	const raceTeams = getTeamValues(raceData, team1, team2);
+
+	const raceTeamValues = compareTeamValues(raceTeams[0], raceTeams[1]);
 </script>
 
 <div class="p-4">
@@ -41,19 +42,25 @@
 				})}
 	/>
 	<div class="flex gap-4 items-center justify-between">
-		<Team team={team1Data} />
+		<Team
+			qualiPaceTeam={qualiTeamsValues.team1}
+			racePaceTeam={raceTeamValues.team1}
+			team={team1Data}
+		/>
 		<div class="lg:mx-10">
 			<img src="images/logo.webp" alt="logo" class="z-10 w-56 object-cover" />
 			<div class="text-center uppercase text-sm lg:text-xl font-bold space-y-2 mt-20 lg:mt-10">
-				<!--<p>Quali Pace</p>
-			<p>H2H Quali</p>
-			<p>Race Pace</p>
-			<p>H2H Race</p>-->
+				<p>Quali Pace</p>
+				<p>Race Pace</p>
 				<p>Wins</p>
 				<p>Position</p>
 				<p>Points</p>
 			</div>
 		</div>
-		<Team team={team2Data} />
+		<Team
+			qualiPaceTeam={qualiTeamsValues.team2}
+			racePaceTeam={raceTeamValues.team2}
+			team={team2Data}
+		/>
 	</div>
 </div>

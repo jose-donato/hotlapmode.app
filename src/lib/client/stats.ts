@@ -32,6 +32,39 @@ export function getDriverValues(data, driver1Name, driver2Name) {
 	return [values1, values2, values3];
 }
 
+export function compareTeamValues(data1, data2) {
+	const result = {};
+	Object.keys(data1).forEach((key) => {
+		if (typeof data1[key] === 'number' && typeof data2[key] === 'number') {
+			const diff = data1[key] / data2[key] - 1;
+			result[key] = diff;
+		} else {
+			/*if (['DNF', 'none'].includes(data1[key])) {
+				team1DNFs++;
+			}
+			if (['DNF', 'none'].includes(data2[key])) {
+				team2DNFs++;
+			}*/
+			result[key] = null;
+		}
+	});
+	const values = Object.values(result).filter((value) => value !== null);
+	const avg = values.reduce((a, b) => a + b, 0) / values.length;
+	const fasterTeam = avg < 0 ? 'team1' : 'team2';
+	return {
+		values: result,
+		avg,
+		team1: {
+			faster: fasterTeam === 'team1',
+			avg: (avg * 100).toFixed(3)
+		},
+		team2: {
+			faster: fasterTeam === 'team2',
+			avg: (avg * 100).toFixed(3)
+		}
+	};
+}
+
 export function compareValues(
 	data1,
 	data2,

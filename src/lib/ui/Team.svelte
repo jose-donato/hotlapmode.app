@@ -1,6 +1,9 @@
 <script lang="ts">
 	import clsx from 'clsx';
 	export let team;
+	export let qualiPaceTeam;
+	export let racePaceTeam;
+
 	async function callApi(url: string) {
 		const response = await fetch('/api?url=' + url);
 		const data = await response.json();
@@ -25,42 +28,22 @@
 		</div>
 	</div>
 	<div class="text-center uppercase text-sm lg:text-xl font-bold space-y-2">
-		<!--
 		<p
 			class={clsx({
-				'text-green-500': qualiPaceDriver.ahead.diff < 0,
-				'text-red-500': qualiPaceDriver.ahead.diff > 0
+				'text-green-500': qualiPaceTeam.faster,
+				'text-red-500': !qualiPaceTeam.faster
 			})}
 		>
-			{qualiPaceDriver.avg}%
+			{qualiPaceTeam.avg}%
 		</p>
 		<p
 			class={clsx({
-				'text-green-500': qualiPaceDriver.ahead.diff < 0,
-				'text-red-500': qualiPaceDriver.ahead.diff > 0,
-				'text-white': qualiPaceDriver.ahead.diff === 0
+				'text-green-500': racePaceTeam.faster,
+				'text-red-500': !racePaceTeam.faster
 			})}
 		>
-			{qualiPaceDriver.ahead.amount}
+			{racePaceTeam.avg}%
 		</p>
-
-		<p
-			class={clsx({
-				'text-green-500': racePaceDriver.ahead.diff < 0,
-				'text-red-500': racePaceDriver.ahead.diff > 0
-			})}
-		>
-			{racePaceDriver.avg}%
-		</p>
-		<p
-			class={clsx({
-				'text-green-500': racePaceDriver.ahead.diff < 0,
-				'text-red-500': racePaceDriver.ahead.diff > 0,
-				'text-white': racePaceDriver.ahead.diff === 0
-			})}
-		>
-			{racePaceDriver.ahead.amount}
-		</p>-->
 		<p
 			class={clsx({
 				'text-green-500': team.wins.diff > 0,

@@ -79,12 +79,18 @@
 	<Table columns={['Circuit', team1, team2, 'Difference']} rows={h2hQualiData} />
 	<Chart
 		info={type === 'race'
-			? 'Values obtained through the pace of the best driver for every team'
-			: 'Quali Values obtained through the best sector times of the best driver for every team'}
+			? 'Values obtained through the pace of the best driver for every team. Negative values mean left team was faster'
+			: 'Quali Values obtained through the best sector times of the best driver for every team. Negative values mean left team was faster'}
 		data={{
 			labels: circuits,
 			datasets: [
 				{
+					fill: true,
+					lineTension: 0.3,
+					backgroundColor: '#F28C18',
+					borderColor: '#F28C18',
+					borderCapStyle: 'butt',
+					pointBackgroundColor: '#fff',
 					label: `${team1} vs ${team2} - ${type} % Difference`,
 					data: h2hQualiData ? h2hQualiData.map((row) => row.differenceValue) : []
 				}

@@ -30,10 +30,20 @@
 			x: {
 				ticks: {
 					color: '#D3D3D3'
+				},
+				title: {
+					display: true,
+					text: 'Circuit',
+					color: '#D3D3D3'
 				}
 			},
 			y: {
 				ticks: {
+					color: '#D3D3D3'
+				},
+				title: {
+					display: true,
+					text: 'Difference in %',
 					color: '#D3D3D3'
 				}
 			}

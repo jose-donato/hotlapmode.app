@@ -39,8 +39,8 @@
 	<Table columns={['Circuit', driver1, driver2, 'Difference']} rows={h2hQualiData} />
 	<Chart
 		info={type === 'race'
-			? 'Values calculated through FastF1 with an automized code for all drivers'
-			: 'Values calculated through comparison with teammate in last Q session both took part in'}
+			? 'Values calculated through FastF1 with an automized code for all drivers. Negative value means left driver was faster.'
+			: 'Values calculated through comparison with teammate in last Q session both took part in. Negative value means left driver was faster.'}
 		data={{
 			labels: circuits,
 			datasets: [

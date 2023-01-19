@@ -110,7 +110,14 @@
 
 		<TabPanel id="h2h">
 			{#if team1 !== undefined && team2 !== undefined && team1 !== 'Select first team' && team2 !== 'Select second team'}
-				<ComparisonTeam {team1Data} {team2Data} />
+				<ComparisonTeam
+					qualiData={data.teamsQualiPace.values}
+					raceData={data.teamsRacePace.values}
+					{team1Data}
+					{team2Data}
+					{team1}
+					{team2}
+				/>
 			{:else}
 				<h2 class="p-4">Please select two teams to compare</h2>
 			{/if}

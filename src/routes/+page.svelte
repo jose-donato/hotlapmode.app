@@ -209,6 +209,7 @@
 		<TabPanel id="race">
 			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
 				<ComparisonRace
+					type="race"
 					raceData={data.race.values}
 					driversData={data.drivers.values}
 					{driver1}
