@@ -1,11 +1,15 @@
 <script lang="ts">
 	import type { PageServerData } from './$types';
 	export let data: PageServerData;
+
+	console.log(data);
+
 	import Tabs from '$lib/ui/Tabs/Tabs.svelte';
 	import TabList from '$lib/ui/Tabs/TabList.svelte';
 	import Tab from '$lib/ui/Tabs/Tab.svelte';
 	import TabPanel from '$lib/ui/Tabs/TabPanel.svelte';
 	import ComparisonTeam from '$lib/ui/ComparisonTeam.svelte';
+	import ComparisonTeamRace from '$lib/ui/ComparisonTeamRace.svelte';
 
 	let items = data.teams.values.map((team) => ({
 		value: team.Team,
@@ -113,13 +117,16 @@
 		</TabPanel>
 
 		<TabPanel id="quali">
-			{#if team1 !== undefined && team2 !== undefined && team1 !== 'Select first team' && team2 !== 'Select second team'}{:else}
+			{#if team1 !== undefined && team2 !== undefined && team1 !== 'Select first team' && team2 !== 'Select second team'}
+				<ComparisonTeamRace teamsData={data.teamsQualiPace.values} {team1} {team2} />{:else}
 				<h2 class="p-4">Please select two teams to compare</h2>
 			{/if}
 		</TabPanel>
 
 		<TabPanel id="race">
-			{#if team1 !== undefined && team2 !== undefined && team1 !== 'Select first team' && team2 !== 'Select second team'}{:else}
+			{#if team1 !== undefined && team2 !== undefined && team1 !== 'Select first team' && team2 !== 'Select second team'}
+				<ComparisonTeamRace type="race" teamsData={data.teamsRacePace.values} {team1} {team2} />
+			{:else}
 				<h2 class="p-4">Please select two teams to compare</h2>
 			{/if}
 		</TabPanel>

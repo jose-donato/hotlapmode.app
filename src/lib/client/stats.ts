@@ -1,3 +1,15 @@
+export function getTeamValues(data, driver1Name, driver2Name) {
+	let values1 = {};
+	let values2 = {};
+	data.forEach((circuit) => {
+		if (circuit.Circuit !== 'TOTAL') {
+			values1[circuit.Circuit] = parseFloat(circuit[driver1Name]) || circuit[driver1Name];
+			values2[circuit.Circuit] = parseFloat(circuit[driver2Name]) || circuit[driver2Name];
+		}
+	});
+	return [values1, values2];
+}
+
 export function getDriverValues(data, driver1Name, driver2Name) {
 	let values1 = {};
 	let values2 = {};

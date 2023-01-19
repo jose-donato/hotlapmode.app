@@ -1,13 +1,14 @@
 <script>
-	import { getDriverValues } from '$lib/client/stats';
+	import { getTeamValues } from '$lib/client/stats';
 	import Chart from './Chart.svelte';
 	import Table from './Table.svelte';
 	export let team1;
 	export let team2;
+	export let type = 'quali';
 	export let teamsData;
 	const circuits = teamsData.map((q) => q.Circuit);
 
-	const qualiDrivers = getDriverValues(teamsData, team1.value, team2.value);
+	const qualiDrivers = getTeamValues(teamsData, team1, team2);
 	//const qualiDriverValues = compareValues(qualiDrivers[0], qualiDrivers[1]);
 
 	const h2hQualiData = circuits.map((circuit) => {
@@ -16,19 +17,21 @@
 		const difference =
 			driver1Laptime > 0 && driver2Laptime > 0 ? (driver1Laptime / driver2Laptime - 1) * 100 : '-';
 
-		return {
+		const data = {
 			Circuit: circuit,
-			Team1: {
-				value: driver1Laptime,
-				color: typeof difference === 'number' ? (difference < 0 ? 'green' : 'red') : 'grey'
-			},
 			differenceValue: difference,
-			Team2: {
-				value: driver2Laptime,
-				color: typeof difference === 'number' ? (difference > 0 ? 'green' : 'red') : 'grey'
-			},
 			Difference: typeof difference === 'number' ? `${difference.toFixed(2)}%` : difference
 		};
+		data[team1] = {
+			value: driver1Laptime,
+			color: typeof difference === 'number' ? (difference < 0 ? 'green' : 'red') : 'grey'
+		};
+
+		data[team2] = {
+			value: driver2Laptime,
+			color: typeof difference === 'number' ? (difference > 0 ? 'green' : 'red') : 'grey'
+		};
+		return data;
 	});
 </script>
 
@@ -73,10 +76,11 @@
 </div>
 
 <div class="grid grid-cols-2 w-full gap-2">
-	<Table columns={['Circuit', 'Team1', 'Team2', 'Difference']} rows={h2hQualiData} />
+	<Table columns={['Circuit', team1, team2, 'Difference']} rows={h2hQualiData} />
 	<Chart
-		info="Values obtained through the pace of the best driver for every team"
-		info2="Quali Values obtained through the best sector times of the best driver for every team"
+		info={type === 'race'
+			? 'Values obtained through the pace of the best driver for every team'
+			: 'Quali Values obtained through the best sector times of the best driver for every team'}
 		data={{
 			labels: circuits,
 			datasets: [
