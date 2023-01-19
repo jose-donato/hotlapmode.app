@@ -10,12 +10,8 @@
 		@apply shadow-xl backdrop-filter backdrop-blur-xl  bg-base-300/80 border-white/10 rounded border;
 	}
 	._icon-btn {
-		@apply btn btn-square btn-sm;
+		@apply btn btn-square btn-xs;
 	}
-}
-
-.svelte-select-list {
-	z-index: 20 !important;
 }
 
 svg {

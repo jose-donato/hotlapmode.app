@@ -1,87 +1,101 @@
 <script lang="ts">
 	import type { PageServerData } from './$types';
-	import { fade } from 'svelte/transition';
-
 	export let data: PageServerData;
-
-	import Select from 'svelte-select';
-	import Comparison from '$lib/ui/Comparison.svelte';
 	import Tabs from '$lib/ui/Tabs/Tabs.svelte';
 	import TabList from '$lib/ui/Tabs/TabList.svelte';
 	import Tab from '$lib/ui/Tabs/Tab.svelte';
 	import TabPanel from '$lib/ui/Tabs/TabPanel.svelte';
-	import ComparisonQuali from '$lib/ui/ComparisonQuali.svelte';
-	import ComparisonRace from '$lib/ui/ComparisonRace.svelte';
-	import ComparisonTeamRace from '$lib/ui/ComparisonTeamRace.svelte';
 	import ComparisonTeam from '$lib/ui/ComparisonTeam.svelte';
 
 	let items = data.teams.values.map((team) => ({
 		value: team.Team,
-		label: team['Full Team Name']
+		label: team.Team
 	}));
 
-	type itemType = {
-		groupItem: boolean;
-		value: string;
-		label: string;
-		selectable?: boolean;
-	};
-
-	const groupBy = (item: itemType) => item.group;
-
-	let team1: itemType;
-	let team2: itemType;
-
-	//TODO: figure out when state it out of date
-
-	let unique = {};
+	let team1: string;
+	let team2: string;
+	let team1Data: any;
+	let team2Data: any;
 
 	let selectedId = 'h2h';
+
+	const getTeams = (team1: string, team2: string) => {
+		const teams = data.teams.values.filter((team) => {
+			return team.Team === team1 || team.Team === team2;
+		});
+		let team1Data = teams[0];
+		let team2Data = teams[1];
+
+		team1Data = {
+			...team1Data,
+			points: {
+				value: team1Data['points'],
+				diff: team1Data['points'] - team2Data['points']
+			},
+			wins: {
+				value: team1Data['wins'],
+				diff: team1Data['wins'] - team2Data['wins']
+			},
+			position: {
+				value: team1Data['position'],
+				diff: team2Data['position'] - team1Data['position']
+			}
+		};
+
+		team2Data = {
+			...team2Data,
+			points: {
+				value: team2Data['points'],
+				diff: team2Data['points'] - team1Data['points'].value
+			},
+			wins: {
+				value: team2Data['wins'],
+				diff: team2Data['wins'] - team1Data['wins'].value
+			},
+			position: {
+				value: team2Data['position'],
+				diff: team1Data['position'].value - team2Data['position']
+			}
+		};
+
+		return { team1Data, team2Data };
+	};
+	$: {
+		if (
+			team1 !== undefined &&
+			team2 !== undefined &&
+			team1 !== 'Select first team' &&
+			team2 !== 'Select second team'
+		) {
+			const teamsData = getTeams(team1, team2);
+			team1Data = teamsData.team1Data;
+			team2Data = teamsData.team2Data;
+		}
+	}
 </script>
 
 <div class="container mx-auto flex justify-center flex-col gap-6">
-	<div class="flex flex-col md:flex-row gap-4">
-		<div class="md:w-1/2 flex flex-col gap-2">
+	<div class="flex flex-col md:flex-row gap-4 mx-auto">
+		<div class="flex flex-col gap-2">
 			<label for="team1">Team 1</label>
-			<Select
-				id="team1"
-				placeholder="Select first team to compare"
-				--background="#333333ff"
-				--list-background="#333333ff"
-				--item-active-background="#131313ff"
-				--item-hover-bg="#2a2a2aff"
-				{items}
-				{groupBy}
-				bind:value={team1}
-			/>
+			<select id="team1" class="select select-bordered w-full max-w-xs" bind:value={team1}>
+				<option disabled selected>Select first team</option>
+				{#each items as item}
+					<option disabled={team2 === item.value} value={item.value}>{item.label}</option>
+				{/each}
+			</select>
 		</div>
-		{#if team1}
-			<div transition:fade class="md:w-1/2 flex flex-col gap-2">
-				<label for="team2">Team 2</label>
-				<Select
-					id="team2"
-					--background="#333333ff"
-					--list-background="#333333ff"
-					--item-active-background="#131313ff"
-					--item-hover-bg="#2a2a2aff"
-					placeholder="Select second team to compare"
-					items={items.map((item) => {
-						return {
-							...item,
-							selectable: team1?.value !== item.value
-						};
-					})}
-					{groupBy}
-					bind:value={team2}
-				/>
-			</div>
-		{/if}
+		<div class="flex flex-col gap-2">
+			<label for="team2">Team 2</label>
+			<select id="team2" class="select select-bordered w-full max-w-xs" bind:value={team2}>
+				<option disabled selected>Select second team</option>
+
+				{#each items as item}
+					<option disabled={team1 === item.value} value={item.value}>{item.label}</option>
+				{/each}
+			</select>
+		</div>
 	</div>
-	<button
-		disabled={!team1 || !team2}
-		class="btn mx-auto px-2 py-1 disabled:pointer-events-none disabled:opacity-50"
-		on:click={() => (unique = {})}>Calculate</button
-	>
 
 	<Tabs {selectedId}>
 		<TabList>
@@ -91,30 +105,22 @@
 		</TabList>
 
 		<TabPanel id="h2h">
-			{#if team1 && team2}
-				{#key unique}
-					<ComparisonTeam teamsData={data.teams.values} {team1} {team2} />
-				{/key}
+			{#if team1 !== undefined && team2 !== undefined && team1 !== 'Select first team' && team2 !== 'Select second team'}
+				<ComparisonTeam {team1Data} {team2Data} />
 			{:else}
-				<h2>Please select two teams to compare</h2>
+				<h2 class="p-4">Please select two teams to compare</h2>
 			{/if}
 		</TabPanel>
 
 		<TabPanel id="quali">
-			{#if team1 && team2}
-				{#key unique}{/key}
-			{:else}
-				<h2>Please select two teams to compare</h2>
+			{#if team1 !== undefined && team2 !== undefined && team1 !== 'Select first team' && team2 !== 'Select second team'}{:else}
+				<h2 class="p-4">Please select two teams to compare</h2>
 			{/if}
 		</TabPanel>
 
 		<TabPanel id="race">
-			{#if team1 && team2}
-				{#key unique}
-					<ComparisonTeamRace teamsData={data.teamsRacePace.values} {team1} {team2} />
-				{/key}
-			{:else}
-				<h2>Please select two teams to compare</h2>
+			{#if team1 !== undefined && team2 !== undefined && team1 !== 'Select first team' && team2 !== 'Select second team'}{:else}
+				<h2 class="p-4">Please select two teams to compare</h2>
 			{/if}
 		</TabPanel>
 	</Tabs>

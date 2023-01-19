@@ -10,10 +10,24 @@
 	export let driver: driverType;
 	export let qualiPaceDriver;
 	export let racePaceDriver;
+
+	async function callApi(url: string) {
+		const response = await fetch('/api?url=' + url);
+		const data = await response.json();
+		return data.base64;
+	}
 </script>
 
 <div class="lg:w-72 flex flex-col justify-center items-center">
-	<img src={driver.Image} class="w-20 h-20 object-cover" alt="driver 1" />
+	{#if driver.Image.includes('https://')}
+		{#await callApi(driver.Image)}
+			<div class="w-20 h-20" />
+		{:then src}
+			<img {src} class="w-20 h-20 object-cover" alt="driver" />
+		{/await}
+	{:else}
+		<img src={driver.Image} class="w-20 h-20 object-cover" alt="driver" />
+	{/if}
 	<div class="flex justify-center h-20 gap-10">
 		<div class="flex flex-col justify-center">
 			<h1 class="text-center text-sm lg:text-xl font-bold tracking-wide">{driver['Full Name']}</h1>

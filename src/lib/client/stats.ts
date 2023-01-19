@@ -20,7 +20,16 @@ export function getDriverValues(data, driver1Name, driver2Name) {
 	return [values1, values2, values3];
 }
 
-export function compareValues(data1, data2, data3) {
+export function compareValues(
+	data1,
+	data2,
+	data3,
+	driver1Name,
+	driver2Name,
+	sameTeamDriver,
+	h2h,
+	sessionType
+) {
 	const result = {};
 	let driver1Ahead = 0;
 	let driver2Ahead = 0;
@@ -29,7 +38,6 @@ export function compareValues(data1, data2, data3) {
 	let driver1Total = 0;
 	let driver2Total = 0;
 	Object.keys(data1).forEach((key) => {
-		// check if both are numbers
 		if (typeof data1[key] === 'number' && typeof data2[key] === 'number') {
 			if (data3[key] !== 'none') {
 				driver1Total = driver1Total + data1[key];
@@ -54,6 +62,40 @@ export function compareValues(data1, data2, data3) {
 	});
 	const values = Object.values(result).filter((value) => value !== null);
 	const avg = values.reduce((a, b) => a + b, 0) / values.length;
+
+	if (sameTeamDriver && h2h) {
+		const driver1Data = h2h[driver1Name][sessionType];
+		const driver2Data = h2h[driver2Name][sessionType];
+
+		return {
+			values: result,
+			avg,
+			driver1: {
+				avg: driver1Data.diff.toFixed(3),
+				dnfs: {
+					amount: driver1DNFs,
+					percentage: ((driver1DNFs / Object.keys(data1).length) * 100).toFixed(2),
+					diff: driver1DNFs - driver2DNFs
+				},
+				ahead: {
+					amount: driver1Data.value,
+					diff: driver2Data.value - driver1Data.value
+				}
+			},
+			driver2: {
+				avg: driver2Data.diff.toFixed(3),
+				dnfs: {
+					amount: driver2DNFs,
+					percentage: ((driver2DNFs / Object.keys(data2).length) * 100).toFixed(2),
+					diff: driver2DNFs - driver1DNFs
+				},
+				ahead: {
+					amount: driver2Data.value,
+					diff: driver1Data.value - driver2Data.value
+				}
+			}
+		};
+	}
 	return {
 		values: result,
 		avg,

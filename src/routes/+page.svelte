@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageServerData } from './$types';
 	export let data: PageServerData;
+
 	import Comparison from '$lib/ui/Comparison.svelte';
 	import Tabs from '$lib/ui/Tabs/Tabs.svelte';
 	import TabList from '$lib/ui/Tabs/TabList.svelte';
@@ -44,7 +45,6 @@
 		let driver1Data = drivers[0];
 		let driver2Data = drivers[1];
 
-		// get "HLM Rating" and compare between drivers
 		let driver1HLM = parseFloat(driver1Data['HLM Rating']);
 		let driver2HLM = parseFloat(driver2Data['HLM Rating']);
 		let driver1Media = parseFloat(driver1Data['Media Rating']);
@@ -180,6 +180,7 @@
 		<TabPanel id="h2h">
 			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
 				<Comparison
+					h2h={data.h2h}
 					{sameTeamDriver}
 					{driver1Data}
 					{driver2Data}
@@ -189,7 +190,7 @@
 					{driver2}
 				/>
 			{:else}
-				<h2>Please select two drivers to compare</h2>
+				<h2 class="p-4">Please select two drivers to compare</h2>
 			{/if}
 		</TabPanel>
 
@@ -202,7 +203,7 @@
 					{driver2}
 				/>
 			{:else}
-				<h2>Please select two drivers to compare</h2>
+				<h2 class="p-4">Please select two drivers to compare</h2>
 			{/if}
 		</TabPanel>
 
@@ -215,7 +216,7 @@
 					{driver2}
 				/>
 			{:else}
-				<h2>Please select two drivers to compare</h2>
+				<h2 class="p-4">Please select two drivers to compare</h2>
 			{/if}
 		</TabPanel>
 	</Tabs>
