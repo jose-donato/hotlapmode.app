@@ -9,21 +9,23 @@
 	import Team from './Team.svelte';
 	import { toPng } from 'html-to-image';
 
-	export let team1: string;
-	export let team2: string;
-
-	export let team1Data;
-	export let team2Data;
-
+	export let teamsData;
 	export let qualiData;
 	export let raceData;
 
-	const qualiTeams = getTeamValues(qualiData, team1, team2);
+	$: qualiTeamValues = compareTeamValues(
+		qualiData,
+		teamsData.team1Data.Team,
+		teamsData.team2Data.Team,
+		'Quali'
+	);
 
-	const qualiTeamsValues = compareTeamValues(qualiTeams[0], qualiTeams[1]);
-	const raceTeams = getTeamValues(raceData, team1, team2);
-
-	const raceTeamValues = compareTeamValues(raceTeams[0], raceTeams[1]);
+	$: raceTeamValues = compareTeamValues(
+		raceData,
+		teamsData.team1Data.Team,
+		teamsData.team2Data.Team,
+		'Race'
+	);
 </script>
 
 <div class="p-4">
@@ -43,9 +45,9 @@
 	/>
 	<div class="flex gap-4 items-center justify-between">
 		<Team
-			qualiPaceTeam={qualiTeamsValues.team1}
+			qualiPaceTeam={qualiTeamValues.team1}
 			racePaceTeam={raceTeamValues.team1}
-			team={team1Data}
+			team={teamsData.team1Data}
 		/>
 		<div class="lg:mx-10">
 			<img src="images/logo.webp" alt="logo" class="z-10 w-56 object-cover" />
@@ -58,9 +60,9 @@
 			</div>
 		</div>
 		<Team
-			qualiPaceTeam={qualiTeamsValues.team2}
+			qualiPaceTeam={qualiTeamValues.team2}
 			racePaceTeam={raceTeamValues.team2}
-			team={team2Data}
+			team={teamsData.team2Data}
 		/>
 	</div>
 </div>

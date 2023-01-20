@@ -26,13 +26,65 @@ export function getDriverValues(data, driver1Name, driver2Name) {
 			values3[circuit.Circuit] = circuit[key];
 		}
 	});
-	if (key && key.indexOf(driver1Name) > 0 && key.indexOf(driver2Name) > 0 && !driver1First) {
-		[values1, values2] = [values2, values1];
-	}
 	return [values1, values2, values3];
 }
 
-export function compareTeamValues(data1, data2) {
+const DRIVERS_COMBINATION = new Set();
+
+const TEAMS_COMBINATION = new Set();
+
+export function compareDriverValues(
+	data,
+	driver1Name,
+	driver2Name,
+	sameTeamDriver,
+	h2h,
+	sessionType
+) {
+	// check if the combination was already calculated
+	const combination = [...DRIVERS_COMBINATION].find((combination) => {
+		return (
+			combination.driver1Name === driver1Name &&
+			combination.driver2Name === driver2Name &&
+			combination.sessionType === sessionType
+		);
+	});
+	if (combination) {
+		return combination.result;
+	}
+	const driverValues = getDriverValues(data, driver1Name, driver2Name);
+	const values = compareValues(
+		driverValues[0],
+		driverValues[1],
+		driverValues[2],
+		driver1Name,
+		driver2Name,
+		sameTeamDriver,
+		h2h,
+		sessionType
+	);
+	// save lineup to DRIVERS_COMBINATION with the result
+	DRIVERS_COMBINATION.add({
+		driver1Name,
+		driver2Name,
+		sessionType,
+		result: values
+	});
+	return values;
+}
+
+export function compareTeamValues(data, team1, team2, sessionType) {
+	const combination = [...TEAMS_COMBINATION].find((combination) => {
+		return (
+			combination.team1 === team1 &&
+			combination.team2 === team2 &&
+			combination.sessionType === sessionType
+		);
+	});
+	if (combination) {
+		return combination.result;
+	}
+	const [data1, data2] = getTeamValues(data, team1, team2);
 	const result = {};
 	Object.keys(data1).forEach((key) => {
 		if (typeof data1[key] === 'number' && typeof data2[key] === 'number') {
@@ -51,7 +103,7 @@ export function compareTeamValues(data1, data2) {
 	const values = Object.values(result).filter((value) => value !== null);
 	const avg = values.reduce((a, b) => a + b, 0) / values.length;
 	const fasterTeam = avg < 0 ? 'team1' : 'team2';
-	return {
+	const finalResult = {
 		values: result,
 		avg,
 		team1: {
@@ -63,6 +115,13 @@ export function compareTeamValues(data1, data2) {
 			avg: (avg * 100).toFixed(3)
 		}
 	};
+	TEAMS_COMBINATION.add({
+		team1,
+		team2,
+		sessionType,
+		result: finalResult
+	});
+	return finalResult;
 }
 
 export function compareValues(

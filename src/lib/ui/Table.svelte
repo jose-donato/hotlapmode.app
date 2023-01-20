@@ -21,6 +21,25 @@
 	<div class="overflow-x-auto relative">
 		<Export
 			downloadCsvFn={() => {
+				//TODO: MISSING EXPORTS
+				/*const csv = h2hQualiData
+				.filter((row) => row.Circuit !== 'TOTAL')
+				.map((row) => {
+					const values = [row.Circuit, row[team1].value, row[team2].value, row.differenceValue];
+					return values.join(',');
+				})
+				.join('\n');
+
+			const headers = ['Circuit', team1, team2, 'Difference'].join(',');
+			const csvWithHeaders = [headers, csv].join('\n');
+			const blob = new Blob([csvWithHeaders], { type: 'text/csv' });
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = `${team1}-${team2}-race.csv`;
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
 				const csv = rows
 					.filter((row) => row.Circuit !== 'TOTAL')
 					.map((row) => {
@@ -37,7 +56,7 @@
 				a.download = `table.csv`;
 				document.body.appendChild(a);
 				a.click();
-				document.body.removeChild(a);
+				document.body.removeChild(a);*/
 			}}
 			downloadImgFn={() =>
 				toPng(document.getElementById('table'), { cacheBust: true })

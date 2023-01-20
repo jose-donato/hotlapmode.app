@@ -32,12 +32,17 @@
 
 	let driver1: string;
 	let driver2: string;
-	let driver1Data: any;
-	let driver2Data: any;
-	let sameTeamDriver: boolean;
-
 	let selectedId = 'h2h';
 	const getDrivers = (driver1: string, driver2: string) => {
+		if (
+			!(
+				driver1 !== undefined &&
+				driver2 !== undefined &&
+				driver1 !== 'Select first driver' &&
+				driver2 !== 'Select second driver'
+			)
+		)
+			return;
 		const drivers = data.drivers.values.filter((driver) => {
 			return driver.Driver === driver1 || driver.Driver === driver2;
 		});
@@ -96,21 +101,13 @@
 			}
 		};
 
-		return { driver1Data, driver2Data };
+		return {
+			driver1Data,
+			driver2Data,
+			sameTeamDriver: driver1Data['Team'] === driver2Data['Team']
+		};
 	};
-	$: {
-		if (
-			driver1 !== undefined &&
-			driver2 !== undefined &&
-			driver1 !== 'Select first driver' &&
-			driver2 !== 'Select second driver'
-		) {
-			const driversData = getDrivers(driver1, driver2);
-			driver1Data = driversData.driver1Data;
-			driver2Data = driversData.driver2Data;
-			if (driver1Data && driver2Data) sameTeamDriver = driver1Data.Team === driver2Data.Team;
-		}
-	}
+	$: driversData = getDrivers(driver1, driver2);
 </script>
 
 <div class="container mx-auto flex justify-center flex-col gap-6">
@@ -150,7 +147,7 @@
 			<Tab tooltip="Average race pace times for each driver per circuit" id="race">Race Data</Tab>
 		</TabList>
 
-		{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver' && !sameTeamDriver}
+		{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver' && !driversData.sameTeamDriver}
 			<div
 				transition:fade
 				class="alert alert-warning shadow-lg mt-8 w-fit text-sm mx-auto flex items-center justify-center"
@@ -180,13 +177,9 @@
 			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
 				<Comparison
 					h2h={data.h2h}
-					{sameTeamDriver}
-					{driver1Data}
-					{driver2Data}
+					{driversData}
 					qualiData={data.quali.values}
 					raceData={data.race.values}
-					{driver1}
-					{driver2}
 				/>
 			{:else}
 				<h2 class="p-4">Please select two drivers to compare</h2>
@@ -195,12 +188,7 @@
 
 		<TabPanel id="quali">
 			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
-				<ComparisonRace
-					raceData={data.quali.values}
-					driversData={data.drivers.values}
-					{driver1}
-					{driver2}
-				/>
+				<ComparisonRace raceData={data.quali.values} {driversData} />
 			{:else}
 				<h2 class="p-4">Please select two drivers to compare</h2>
 			{/if}
@@ -208,13 +196,7 @@
 
 		<TabPanel id="race">
 			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
-				<ComparisonRace
-					type="race"
-					raceData={data.race.values}
-					driversData={data.drivers.values}
-					{driver1}
-					{driver2}
-				/>
+				<ComparisonRace type="race" raceData={data.race.values} {driversData} />
 			{:else}
 				<h2 class="p-4">Please select two drivers to compare</h2>
 			{/if}

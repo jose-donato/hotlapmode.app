@@ -2,8 +2,6 @@
 	import type { PageServerData } from './$types';
 	export let data: PageServerData;
 
-	console.log(data);
-
 	import Tabs from '$lib/ui/Tabs/Tabs.svelte';
 	import TabList from '$lib/ui/Tabs/TabList.svelte';
 	import Tab from '$lib/ui/Tabs/Tab.svelte';
@@ -18,12 +16,20 @@
 
 	let team1: string;
 	let team2: string;
-	let team1Data: any;
-	let team2Data: any;
 
 	let selectedId = 'h2h';
 
 	const getTeams = (team1: string, team2: string) => {
+		if (
+			!(
+				team1 !== undefined &&
+				team2 !== undefined &&
+				team1 !== 'Select first team' &&
+				team2 !== 'Select second team'
+			)
+		)
+			return;
+
 		const teams = data.teams.values.filter((team) => {
 			return team.Team === team1 || team.Team === team2;
 		});
@@ -64,18 +70,7 @@
 
 		return { team1Data, team2Data };
 	};
-	$: {
-		if (
-			team1 !== undefined &&
-			team2 !== undefined &&
-			team1 !== 'Select first team' &&
-			team2 !== 'Select second team'
-		) {
-			const teamsData = getTeams(team1, team2);
-			team1Data = teamsData.team1Data;
-			team2Data = teamsData.team2Data;
-		}
-	}
+	$: teamsData = getTeams(team1, team2);
 </script>
 
 <div class="container mx-auto flex justify-center flex-col gap-6">
@@ -113,10 +108,7 @@
 				<ComparisonTeam
 					qualiData={data.teamsQualiPace.values}
 					raceData={data.teamsRacePace.values}
-					{team1Data}
-					{team2Data}
-					{team1}
-					{team2}
+					{teamsData}
 				/>
 			{:else}
 				<h2 class="p-4">Please select two teams to compare</h2>
@@ -125,14 +117,14 @@
 
 		<TabPanel id="quali">
 			{#if team1 !== undefined && team2 !== undefined && team1 !== 'Select first team' && team2 !== 'Select second team'}
-				<ComparisonTeamRace teamsData={data.teamsQualiPace.values} {team1} {team2} />{:else}
+				<ComparisonTeamRace {teamsData} teamsRaceData={data.teamsQualiPace.values} />{:else}
 				<h2 class="p-4">Please select two teams to compare</h2>
 			{/if}
 		</TabPanel>
 
 		<TabPanel id="race">
 			{#if team1 !== undefined && team2 !== undefined && team1 !== 'Select first team' && team2 !== 'Select second team'}
-				<ComparisonTeamRace type="race" teamsData={data.teamsRacePace.values} {team1} {team2} />
+				<ComparisonTeamRace type="race" {teamsData} teamsRaceData={data.teamsRacePace.values} />
 			{:else}
 				<h2 class="p-4">Please select two teams to compare</h2>
 			{/if}

@@ -2,14 +2,14 @@
 	import { getDriverValues } from '$lib/client/stats';
 	import Chart from './Chart.svelte';
 	import Table from './Table.svelte';
+
 	export let raceData;
-	export let driver1: string;
-	export let driver2: string;
 	export let driversData;
 	export let type = 'quali';
 	const circuits = raceData.map((q) => q.Circuit);
-
-	const qualiDrivers = getDriverValues(raceData, driver1, driver2);
+	const driver1Name = driversData.driver1Data.Driver;
+	const driver2Name = driversData.driver2Data.Driver;
+	const qualiDrivers = getDriverValues(raceData, driver1Name, driver2Name);
 	//const qualiDriverValues = compareValues(qualiDrivers[0], qualiDrivers[1]);
 
 	const h2hQualiData = circuits.map((circuit) => {
@@ -23,11 +23,11 @@
 			differenceValue: difference,
 			Difference: typeof difference === 'number' ? `${difference.toFixed(2)}%` : difference
 		};
-		data[driver1] = {
+		data[driver1Name] = {
 			value: driver1Laptime,
 			color: typeof difference === 'number' ? (difference < 0 ? 'green' : 'red') : 'grey'
 		};
-		data[driver2] = {
+		data[driver2Name] = {
 			value: driver2Laptime,
 			color: typeof difference === 'number' ? (difference > 0 ? 'green' : 'red') : 'grey'
 		};
@@ -36,7 +36,7 @@
 </script>
 
 <div class="grid lg:grid-cols-2 w-full gap-2">
-	<Table columns={['Circuit', driver1, driver2, 'Difference']} rows={h2hQualiData} />
+	<Table columns={['Circuit', driver1Name, driver2Name, 'Difference']} rows={h2hQualiData} />
 	<Chart
 		info={type === 'race'
 			? 'Values calculated through FastF1 with an automized code for all drivers. Negative value means left driver was faster.'
@@ -51,7 +51,7 @@
 					borderColor: '#F28C18',
 					borderCapStyle: 'butt',
 					pointBackgroundColor: '#fff',
-					label: `${driver1} vs ${driver2} - ${type} % Difference`,
+					label: `${driver1Name} vs ${driver2Name} - ${type} % Difference`,
 					data: h2hQualiData ? h2hQualiData.map((row) => row.differenceValue) : []
 				}
 			]

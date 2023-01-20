@@ -1,41 +1,32 @@
 <script lang="ts">
-	import { compareValues, getDriverValues } from '$lib/client/stats';
+	import { compareDriverValues, compareValues, getDriverValues } from '$lib/client/stats';
 	import Driver from './Driver.svelte';
 	import Export from './Export.svelte';
 	import { toPng } from 'html-to-image';
 
-	export let driver1: string;
-	export let driver2: string;
-
 	export let qualiData;
 	export let raceData;
 	export let h2h;
-	export let sameTeamDriver: string;
-	export let driver1Data;
-	export let driver2Data;
+	export let driversData;
 
-	const qualiDrivers = getDriverValues(qualiData, driver1, driver2);
-	const qualiDriverValues = compareValues(
-		qualiDrivers[0],
-		qualiDrivers[1],
-		qualiDrivers[2],
-		driver1,
-		driver2,
-		sameTeamDriver,
+	$: qualiDriverValues = compareDriverValues(
+		qualiData,
+		driversData.driver1Data.Driver,
+		driversData.driver2Data.Driver,
+		driversData.sameTeamDriver,
 		h2h,
 		'Quali'
 	);
-	const raceDrivers = getDriverValues(raceData, driver1, driver2);
-	const raceDriverValues = compareValues(
-		raceDrivers[0],
-		raceDrivers[1],
-		qualiDrivers[2],
-		driver1,
-		driver2,
-		sameTeamDriver,
+	$: raceDriverValues = compareDriverValues(
+		raceData,
+		driversData.driver1Data.Driver,
+		driversData.driver2Data.Driver,
+		driversData.sameTeamDriver,
 		h2h,
 		'Race'
 	);
+
+	//TODO: convert document.getElementById to a ref
 </script>
 
 <div class="p-4">
@@ -57,7 +48,7 @@
 		<Driver
 			qualiPaceDriver={qualiDriverValues.driver1}
 			racePaceDriver={raceDriverValues.driver1}
-			driver={driver1Data}
+			driver={driversData.driver1Data}
 		/>
 		<div class="lg:mx-10">
 			<img src="images/logo.webp" alt="logo" class="z-10 w-56 object-cover" />
@@ -77,7 +68,7 @@
 		<Driver
 			qualiPaceDriver={qualiDriverValues.driver2}
 			racePaceDriver={raceDriverValues.driver2}
-			driver={driver2Data}
+			driver={driversData.driver2Data}
 		/>
 	</div>
 </div>
