@@ -36,7 +36,7 @@
 	});
 </script>
 
-<div class="grid lg:grid-cols-2 w-full gap-2">
+<div class="grid lg:grid-cols-2 w-full gap-2" id="comparison">
 	<Table columns={['Circuit', team1, team2, 'Difference']} rows={h2hQualiData} />
 	<Chart
 		info={type === 'race'
@@ -48,8 +48,8 @@
 				{
 					fill: true,
 					lineTension: 0.3,
-					backgroundColor: '#F28C18',
-					borderColor: '#F28C18',
+					backgroundColor: '#dc2626',
+					borderColor: '#dc2626',
 					borderCapStyle: 'butt',
 					pointBackgroundColor: '#fff',
 					label: `${team1} vs ${team2} - ${type} % Difference`,

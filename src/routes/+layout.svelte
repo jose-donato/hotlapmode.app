@@ -83,7 +83,7 @@
 		</div>
 		<a
 			href="/"
-			class="lowercase font-bold btn btn-ghost text-xl bg-gradient-to-r bg-clip-text text-transparent from-orange-500 via-orange-300 to-orange-600 motion-reduce:animate-none animate-text"
+			class="lowercase font-bold btn btn-ghost text-xl bg-gradient-to-r bg-clip-text text-transparent  from-primary via-second-red to-primary motion-reduce:animate-none animate-text"
 		>
 			hotlapmode.app
 		</a>
@@ -140,7 +140,7 @@
 	<div>
 		<a
 			href="/"
-			class="lowercase font-bold btn btn-ghost text-xl relative bg-gradient-to-r bg-clip-text text-transparent from-orange-500 via-orange-300 to-orange-600 motion-reduce:animate-none animate-text"
+			class="lowercase font-bold btn btn-ghost text-xl relative bg-gradient-to-r bg-clip-text text-transparent from-primary via-second-red to-primary motion-reduce:animate-none animate-text"
 		>
 			hotlapmode.app
 		</a>
@@ -186,18 +186,18 @@
 				href="mailto:officialhotlapmode@gmail.com"
 			>
 				<svg
-					stroke="currentColor"
-					fill="currentColor"
-					stroke-width="0"
-					viewBox="0 0 512 512"
-					height="1em"
-					width="1em"
 					xmlns="http://www.w3.org/2000/svg"
-					class="fill-current w-6 h-6"
-					><path
-						d="M424 80H88a56.06 56.06 0 00-56 56v240a56.06 56.06 0 0056 56h336a56.06 56.06 0 0056-56V136a56.06 56.06 0 00-56-56zm-14.18 92.63l-144 112a16 16 0 01-19.64 0l-144-112a16 16 0 1119.64-25.26L256 251.73l134.18-104.36a16 16 0 0119.64 25.26z"
-					/></svg
+					viewBox="0 0 24 24"
+					fill="currentColor"
+					class="w-6 h-6"
 				>
+					<path
+						d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"
+					/>
+					<path
+						d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"
+					/>
+				</svg>
 			</a>
 		</div>
 	</div>

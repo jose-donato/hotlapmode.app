@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Line } from 'svelte-chartjs';
-	import { toPng } from 'html-to-image';
 	import {
 		Chart as ChartJS,
 		Title,
@@ -12,8 +11,6 @@
 		CategoryScale
 	} from 'chart.js';
 	import type { ChartOptions } from 'chart.js';
-
-	import Export from './Export.svelte';
 
 	ChartJS.register(Title, Tooltip, Legend, LineElement, LinearScale, PointElement, CategoryScale);
 
@@ -54,40 +51,11 @@
 	export let info: string;
 </script>
 
-<div class="relative flex flex-col">
-	<Export
-		downloadCsvFn={() => {
-			const csv = data.datasets.map((dataset) => {
-				const csvData = dataset.values.map((value, index) => {
-					return `${data.labels[index]},${value}`;
-				});
-				return csvData.join('\n');
-			});
-			const blob = new Blob([csv], { type: 'text/csv' });
-			const url = URL.createObjectURL(blob);
-			const a = document.createElement('a');
-			a.href = url;
-			a.download = `table.csv`;
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-		}}
-		downloadImgFn={() =>
-			toPng(document.getElementById('chart'), { cacheBust: true })
-				.then((dataUrl) => {
-					const link = document.createElement('a');
-					link.download = 'chart.png';
-					link.href = dataUrl;
-					link.click();
-				})
-				.catch((err) => {
-					console.log(err);
-				})}
-	/>
-	<div id="chart" class="mt-2">
+<div class="flex flex-col gap-6">
+	<div class="mt-2">
 		<Line {data} options={chartOptions} />
 	</div>
-	<div class="alert shadow-lg mt-auto mb-4 w-[80%] mx-auto">
+	<div class="alert shadow-lg w-[80%] mx-auto">
 		<div>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

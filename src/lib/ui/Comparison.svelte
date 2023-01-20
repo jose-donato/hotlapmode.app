@@ -1,53 +1,22 @@
 <script lang="ts">
-	import { compareDriverValues, compareValues, getDriverValues } from '$lib/client/stats';
+	import { getAllDriverData } from '$lib/client/stats';
 	import Driver from './Driver.svelte';
-	import Export from './Export.svelte';
-	import { toPng } from 'html-to-image';
 
 	export let qualiData;
 	export let raceData;
 	export let h2h;
 	export let driversData;
 
-	$: qualiDriverValues = compareDriverValues(
-		qualiData,
-		driversData.driver1Data.Driver,
-		driversData.driver2Data.Driver,
-		driversData.sameTeamDriver,
-		h2h,
-		'Quali'
-	);
-	$: raceDriverValues = compareDriverValues(
-		raceData,
-		driversData.driver1Data.Driver,
-		driversData.driver2Data.Driver,
-		driversData.sameTeamDriver,
-		h2h,
-		'Race'
-	);
+	$: data = getAllDriverData(qualiData, raceData, driversData, h2h);
 
 	//TODO: convert document.getElementById to a ref
 </script>
 
-<div class="p-4">
-	<Export
-		downloadCsvFn={() => {}}
-		downloadImgFn={() =>
-			toPng(document.getElementById('comparison'), { cacheBust: true })
-				.then((dataUrl) => {
-					const link = document.createElement('a');
-					link.download = 'comparison.png';
-					link.href = dataUrl;
-					link.click();
-				})
-				.catch((err) => {
-					console.log(err);
-				})}
-	/>
+<div class="my-8">
 	<div class="flex gap-4 items-center justify-between" id="comparison">
 		<Driver
-			qualiPaceDriver={qualiDriverValues.driver1}
-			racePaceDriver={raceDriverValues.driver1}
+			qualiPaceDriver={data.qualiDataValues.driver1}
+			racePaceDriver={data.raceDataValues.driver1}
 			driver={driversData.driver1Data}
 		/>
 		<div class="lg:mx-10">
@@ -66,8 +35,8 @@
 			</div>
 		</div>
 		<Driver
-			qualiPaceDriver={qualiDriverValues.driver2}
-			racePaceDriver={raceDriverValues.driver2}
+			qualiPaceDriver={data.qualiDataValues.driver2}
+			racePaceDriver={data.raceDataValues.driver2}
 			driver={driversData.driver2Data}
 		/>
 	</div>

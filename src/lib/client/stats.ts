@@ -33,6 +33,45 @@ const DRIVERS_COMBINATION = new Set();
 
 const TEAMS_COMBINATION = new Set();
 
+export function getAllDriverData(qualiData, raceData, driversData, h2h) {
+	const driver1Name = driversData.driver1Data.Driver;
+	const driver2Name = driversData.driver2Data.Driver;
+	const sameTeamDriver = driversData.driver1Data.Team === driversData.driver2Data.Team;
+	const qualiDataValues = compareDriverValues(
+		qualiData,
+		driver1Name,
+		driver2Name,
+		sameTeamDriver,
+		h2h,
+		'Quali'
+	);
+	const raceDataValues = compareDriverValues(
+		raceData,
+		driver1Name,
+		driver2Name,
+		sameTeamDriver,
+		h2h,
+		'Race'
+	);
+
+	const data = {
+		qualiDataValues,
+		raceDataValues,
+		driversData
+	};
+	fetch('/save', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			lineup: `${driver1Name}_${driver2Name}`,
+			data
+		})
+	});
+	return data;
+}
+
 export function compareDriverValues(
 	data,
 	driver1Name,

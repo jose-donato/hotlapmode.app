@@ -1,7 +1,5 @@
 <script>
 	import clsx from 'clsx';
-	import { toPng } from 'html-to-image';
-	import Export from './Export.svelte';
 
 	export let rows = [];
 	export let columns = [];
@@ -18,59 +16,8 @@
 {#if !rows}
 	<div class="text-center text-white text-sm">No data</div>
 {:else}
-	<div class="overflow-x-auto relative">
-		<Export
-			downloadCsvFn={() => {
-				//TODO: MISSING EXPORTS
-				/*const csv = h2hQualiData
-				.filter((row) => row.Circuit !== 'TOTAL')
-				.map((row) => {
-					const values = [row.Circuit, row[team1].value, row[team2].value, row.differenceValue];
-					return values.join(',');
-				})
-				.join('\n');
-
-			const headers = ['Circuit', team1, team2, 'Difference'].join(',');
-			const csvWithHeaders = [headers, csv].join('\n');
-			const blob = new Blob([csvWithHeaders], { type: 'text/csv' });
-			const url = URL.createObjectURL(blob);
-			const a = document.createElement('a');
-			a.href = url;
-			a.download = `${team1}-${team2}-race.csv`;
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-				const csv = rows
-					.filter((row) => row.Circuit !== 'TOTAL')
-					.map((row) => {
-						return [row.Circuit, row.driver1, row.driver2, row.Difference].join(',');
-					})
-					.join('\n');
-
-				const headers = columns.join(',');
-				const csvWithHeaders = [headers, csv].join('\n');
-				const blob = new Blob([csvWithHeaders], { type: 'text/csv' });
-				const url = URL.createObjectURL(blob);
-				const a = document.createElement('a');
-				a.href = url;
-				a.download = `table.csv`;
-				document.body.appendChild(a);
-				a.click();
-				document.body.removeChild(a);*/
-			}}
-			downloadImgFn={() =>
-				toPng(document.getElementById('table'), { cacheBust: true })
-					.then((dataUrl) => {
-						const link = document.createElement('a');
-						link.download = 'table.png';
-						link.href = dataUrl;
-						link.click();
-					})
-					.catch((err) => {
-						console.log(err);
-					})}
-		/>
-		<table class="table table-zebra table-compact w-full" id="table">
+	<div class="overflow-x-auto relative min-h-[400px]">
+		<table class="table table-zebra table-compact w-full">
 			<thead>
 				<tr>
 					{#each columns as column}

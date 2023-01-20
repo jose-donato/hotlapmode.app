@@ -4,6 +4,7 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
+				'second-red': '#ed5858',
 				'grey-50': '#f6f6f6ff',
 				'grey-100': '#eaeaeaff',
 				'grey-200': '#dcdcdcff',
@@ -32,6 +33,23 @@ module.exports = {
 				}
 			}
 		}
+	},
+	daisyui: {
+		themes: [
+			{
+				'hotlapmode-theme': {
+					primary: '#dc2626',
+					secondary: '#e5e7eb',
+					accent: '#f4fc83',
+					neutral: '#1B171C',
+					'base-100': '#1c1917',
+					info: '#41ABDC',
+					success: '#4DE09B',
+					warning: '#956C04',
+					error: '#EA5772'
+				}
+			}
+		]
 	},
 	plugins: [require('daisyui')]
 };
