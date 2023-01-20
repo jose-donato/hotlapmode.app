@@ -2,6 +2,7 @@
 	import clsx from 'clsx';
 
 	export let data;
+	console.log(data);
 	// qualiDataValues, raceDataValues, driversData
 	const driver1 = data.driversData.driver1Data;
 	const driver2 = data.driversData.driver2Data;
