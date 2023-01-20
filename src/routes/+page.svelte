@@ -111,6 +111,11 @@
 	$: driversData = getDrivers(driver1, driver2);
 </script>
 
+<svelte:head>
+	<meta name="description" content="Compare two drivers in the F1 2022 season" />
+	<meta name="og:image" content="https://hotlapmode.app/og?line_up=Russell_Hamilton" />
+</svelte:head>
+
 <div class="container mx-auto flex justify-center flex-col gap-6">
 	<div class="flex flex-col md:flex-row gap-4 mx-auto">
 		<div class="flex flex-col gap-2">
