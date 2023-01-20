@@ -18,6 +18,7 @@ export const GET: RequestHandler = async ({ url }) => {
 	}
 	// get values for the lineup
 	const data = cache.get(lineup);
+	console.log(data, lineup);
 	if (!data) {
 		// send default image
 	}
