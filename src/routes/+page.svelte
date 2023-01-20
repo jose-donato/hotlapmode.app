@@ -113,7 +113,7 @@
 
 <svelte:head>
 	<meta name="description" content="Compare two drivers in the F1 2022 season" />
-	<meta name="og:image" content="https://hotlapmode.app/og?line_up=Russell_Hamilton" />
+	<meta name="og:image" content="https://hotlapmode.app/og?lineup=Russell_Hamilton" />
 </svelte:head>
 
 <div class="container mx-auto flex justify-center flex-col gap-6">
