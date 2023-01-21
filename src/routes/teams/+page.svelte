@@ -190,7 +190,9 @@
 						}
 					}
 					window.open(
-						`https://twitter.com/intent/tweet?text=Comparison between ${team1} and ${team2}&url=${url}`,
+						encodeURI(
+							`https://twitter.com/intent/tweet?text=Comparison between ${team1} and ${team2}&url=${url}`
+						),
 						'_blank'
 					);
 				}}
