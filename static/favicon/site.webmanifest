@@ -2,6 +2,8 @@
 	"name": "hotlapmode.app",
 	"short_name": "hotlapmode",
 	"description": "hotlapmode.app is an interactive website where you can discover everything you need to know about teammate comparisons and more! Through various functions within the website Formula 1 fans will now have a more accurate insight in the pace differences between drivers and teams. And more is to come!",
+	"start_url": "/",
+	"scope": "/",
 	"icons": [
 		{
 			"src": "/favicon/android-chrome-192x192.png",
