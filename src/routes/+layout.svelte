@@ -149,7 +149,7 @@
 	</div>
 </header>
 
-<main class="w-[95%] md:w-full mx-auto pt-10 min-h-[70vh]">
+<main class="w-[95%] md:w-full mx-auto pt-10 min-h-[50vh]">
 	<slot />
 </main>
 <footer class="footer footer-center p-10 text-base-content">
@@ -166,12 +166,15 @@
 				rel="noopener noreferrer"
 				class="underline"
 				href="https://twitter.com/hotlapmode">@hotlapmode</a
-			> and developed by <a
+			>
+			and website developed by
+			<a
 				target="_blank"
 				rel="noopener noreferrer"
 				class="underline"
 				href="https://twitter.com/josedonato__">@jose-donato</a
-			> using SvelteKit, tailwindcss and DaisyUI. Any question feel free to DM us on twitter. We are always open to hearing your feedback.
+			> using SvelteKit, tailwindcss and DaisyUI. Any question feel free to DM us on twitter. We are
+			always open to hearing your feedback.
 		</p>
 		<p class="opacity-70">Copyright © 2023 - All right reserved</p>
 	</div>

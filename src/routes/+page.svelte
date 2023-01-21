@@ -194,7 +194,16 @@
 					raceData={data.race.values}
 				/>
 			{:else}
-				<h2 class="p-4">Please select two drivers to compare</h2>
+				<div class="text-center py-4 space-y-2">
+					<h2>Select two drivers from the boxes above</h2>
+					<p class="text-sm">
+						You will be able to see an overall comparison between them, and more detailed Quali/Race
+						comparisons.
+					</p>
+					<p class="text-sm -mt-2">
+						If you want to compare teams instead click <a href="/teams" class="link">here</a>
+					</p>
+				</div>
 			{/if}
 		</TabPanel>
 
@@ -202,7 +211,16 @@
 			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
 				<ComparisonRace raceData={data.quali.values} {driversData} />
 			{:else}
-				<h2 class="p-4">Please select two drivers to compare</h2>
+				<div class="text-center py-4 space-y-2">
+					<h2>Select two drivers from the boxes above</h2>
+					<p class="text-sm">
+						You will be able to see an overall comparison between them, and more detailed Quali/Race
+						comparisons.
+					</p>
+					<p class="text-sm -mt-2">
+						If you want to compare teams instead click <a href="/teams" class="link">here</a>
+					</p>
+				</div>
 			{/if}
 		</TabPanel>
 
@@ -210,7 +228,16 @@
 			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
 				<ComparisonRace type="race" raceData={data.race.values} {driversData} />
 			{:else}
-				<h2 class="p-4">Please select two drivers to compare</h2>
+				<div class="text-center py-4 space-y-2">
+					<h2>Select two drivers from the boxes above</h2>
+					<p class="text-sm">
+						You will be able to see an overall comparison between them, and more detailed Quali/Race
+						comparisons.
+					</p>
+					<p class="text-sm -mt-2">
+						If you want to compare teams instead click <a href="/teams" class="link">here</a>
+					</p>
+				</div>
 			{/if}
 		</TabPanel>
 	</Tabs>

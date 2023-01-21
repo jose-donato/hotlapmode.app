@@ -18,7 +18,9 @@
 		/>
 		<div class="lg:mx-10">
 			<img src="images/logo.webp" alt="logo" class="z-10 w-56 object-cover" />
-			<div class="text-center uppercase text-sm lg:text-xl font-bold space-y-2 mt-12 lg:mt-10">
+			<div
+				class="text-center uppercase text-sm lg:text-xl font-bold space-y-2 mt-20 sm:mt-9 lg:mt-10"
+			>
 				<p>Quali Pace</p>
 				<p>Race Pace</p>
 				<p>Wins</p>
