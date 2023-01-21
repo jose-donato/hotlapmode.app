@@ -11,24 +11,9 @@
 	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
 
+	let ReloadPrompt;
 	onMount(async () => {
-		if (pwaInfo) {
-			const { registerSW } = await import('virtual:pwa-register');
-			registerSW({
-				immediate: true,
-				onRegistered(r) {
-					// uncomment following code if you want check for updates
-					// r && setInterval(() => {
-					//    console.log('Checking for sw update')
-					//    r.update()
-					// }, 20000 /* 20s for testing purposes */)
-					console.log(`SW Registered: ${r}`);
-				},
-				onRegisterError(error) {
-					console.log('SW registration error', error);
-				}
-			});
-		}
+		pwaInfo && (ReloadPrompt = (await import('$lib/ui/ReloadPrompt.svelte')).default);
 	});
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
@@ -181,6 +166,9 @@
 <main class="w-[95%] md:w-full mx-auto pt-10 min-h-[50vh]">
 	<slot />
 </main>
+{#if ReloadPrompt}
+	<svelte:component this={ReloadPrompt} />
+{/if}
 <footer class="footer footer-center p-10 text-base-content">
 	<div class="max-w-[600px]">
 		<a

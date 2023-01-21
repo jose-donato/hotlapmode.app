@@ -2,6 +2,7 @@
 	import { getContext } from 'svelte';
 	import { tabContextId } from './Tabs.svelte';
 	import clsx from 'clsx';
+	import { browser } from '$app/environment';
 	export let id: string;
 	export let tooltip: string;
 
@@ -13,7 +14,18 @@
 		class={clsx('tab', {
 			'tab-active': $selectedTab === id
 		})}
-		on:click={() => selectTab(id)}
+		on:click={() => {
+			selectTab(id);
+			if (browser) {
+				//console.log('trackEvent selected-tab', id);
+				window?.insights?.track({
+					id: 'selected-tab',
+					parameters: {
+						tab: id
+					}
+				});
+			}
+		}}
 	>
 		<slot />
 	</button>

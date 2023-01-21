@@ -11,6 +11,7 @@
 	import ComparisonTeam from '$lib/ui/ComparisonTeam.svelte';
 	import ComparisonTeamRace from '$lib/ui/ComparisonTeamRace.svelte';
 	import { fade } from 'svelte/transition';
+	import { browser } from '$app/environment';
 	const paramLineup = $page.url.searchParams.get('lineup');
 	let lineup = paramLineup ? paramLineup.split('_') : [];
 	let items = data.teams.values.map((team) => ({
@@ -79,6 +80,21 @@
 	function clearTeams() {
 		team1 = 'Select first team';
 		team2 = 'Select second team';
+	}
+
+	$: {
+		if (browser) {
+			if (team1 !== 'Select first team' && team2 !== 'Select second team') {
+				//console.log('trackEvent comparison-teams', team1, team2);
+				window?.insights?.track({
+					id: 'comparison-teams',
+					parameters: {
+						team1,
+						team2
+					}
+				});
+			}
+		}
 	}
 </script>
 

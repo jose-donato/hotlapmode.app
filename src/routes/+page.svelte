@@ -6,12 +6,13 @@
 	import { toPng } from 'html-to-image';
 
 	import Comparison from '$lib/ui/Comparison.svelte';
-	import Tabs from '$lib/ui/Tabs/Tabs.svelte';
+	import Tabs, { tabContextId } from '$lib/ui/Tabs/Tabs.svelte';
 	import TabList from '$lib/ui/Tabs/TabList.svelte';
 	import Tab from '$lib/ui/Tabs/Tab.svelte';
 	import TabPanel from '$lib/ui/Tabs/TabPanel.svelte';
 	import ComparisonRace from '$lib/ui/ComparisonRace.svelte';
 	import { fade } from 'svelte/transition';
+	import { browser } from '$app/environment';
 
 	const paramLineup = $page.url.searchParams.get('lineup');
 	let lineup = paramLineup ? paramLineup.split('_') : [];
@@ -120,6 +121,21 @@
 	function clearDrivers() {
 		driver1 = 'Select first driver';
 		driver2 = 'Select second driver';
+	}
+
+	$: {
+		if (browser) {
+			if (driver1 !== 'Select first driver' && driver2 !== 'Select second driver') {
+				//console.log('trackEvent comparison-drivers', driver1, driver2);
+				window?.insights?.track({
+					id: 'comparison-drivers',
+					parameters: {
+						driver1,
+						driver2
+					}
+				});
+			}
+		}
 	}
 </script>
 
