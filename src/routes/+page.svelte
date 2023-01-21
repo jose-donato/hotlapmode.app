@@ -206,7 +206,9 @@
 						comparisons.
 					</p>
 					<p class="text-sm -mt-2">
-						If you want to compare teams instead click <a href="/teams" class="link">here</a>
+						If you want to compare teams instead change to <a href="/teams" class="link"
+							>teams page</a
+						>
 					</p>
 				</div>
 			{/if}
@@ -225,7 +227,9 @@
 						comparisons.
 					</p>
 					<p class="text-sm -mt-2">
-						If you want to compare teams instead click <a href="/teams" class="link">here</a>
+						If you want to compare teams instead change to <a href="/teams" class="link"
+							>teams page</a
+						>
 					</p>
 				</div>
 			{/if}
@@ -244,7 +248,9 @@
 						comparisons.
 					</p>
 					<p class="text-sm -mt-2">
-						If you want to compare teams instead click <a href="/teams" class="link">here</a>
+						If you want to compare teams instead change to <a href="/teams" class="link"
+							>teams page</a
+						>
 					</p>
 				</div>
 			{/if}

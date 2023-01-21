@@ -65,8 +65,6 @@
 				ticks: {
 					color: '#D3D3D3'
 				},
-				suggestedMin: 2,
-				suggestedMax: -2,
 				title: {
 					display: true,
 					text: 'Difference in %',

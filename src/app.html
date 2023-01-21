@@ -4,24 +4,44 @@
 		<title>hotlapmode</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-		<meta name="color-scheme" content="dark">
-		<meta name="description" content="hotlapmode.app is an interactive website where you can discover everything you need to know about teammate comparisons and more! Through various functions within the website Formula 1 fans will now have a more accurate insight in the pace differences between drivers and teams. And more is to come!" />
+		<meta name="color-scheme" content="dark" />
+		<meta
+			name="description"
+			content="hotlapmode.app is an interactive website where you can discover everything you need to know about teammate comparisons and more! Through various functions within the website Formula 1 fans will now have a more accurate insight in the pace differences between drivers and teams. And more is to come!"
+		/>
 		<meta name="keywords" content="F1,Data Analysis,Teammate,Comparison" />
-		<link rel="apple-touch-icon" sizes="180x180" href="%sveltekit.assets%/favicon/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="%sveltekit.assets%/favicon/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="%sveltekit.assets%/favicon/favicon-16x16.png">
-		<link rel="manifest" href="%sveltekit.assets%/favicon/site.webmanifest">
-		<link rel="mask-icon" href="%sveltekit.assets%/favicon/safari-pinned-tab.svg" color="#1c1917">
-		<meta name="msapplication-TileColor" content="#1c1917">
-		<meta name="theme-color" content="#1c1917">
-		<script src="https://getinsights.io/js/insights.js"></script>
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="%sveltekit.assets%/favicon/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="%sveltekit.assets%/favicon/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="%sveltekit.assets%/favicon/favicon-16x16.png"
+		/>
+		<link rel="manifest" href="%sveltekit.assets%/favicon/site.webmanifest" />
+		<link rel="mask-icon" href="%sveltekit.assets%/favicon/safari-pinned-tab.svg" color="#1c1917" />
+		<meta name="msapplication-TileColor" content="#1c1917" />
+		<meta name="theme-color" content="#1c1917" />
+		<link rel="preconnect" href="https://getinsights.io" />
+		<script src="https://getinsights.io/js/insights.js" defer></script>
 		<script>
-			try {
-				if(insights) {
-					insights.init('IbvtJs3YFJnf01fz');
-					insights.trackPages();
-				}
-			} catch(e) {}
+			setTimeout(function () {
+				try {
+					if (insights) {
+						insights.init('IbvtJs3YFJnf01fz');
+						insights.trackPages();
+					}
+				} catch (e) {}
+			}, 500);
 		</script>
 		%sveltekit.head%
 	</head>
