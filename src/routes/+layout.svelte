@@ -161,19 +161,17 @@
 			hotlapmode.app
 		</a>
 		<p class="">
-			This website was made in a collaborative effort between <a
-				target="_blank"
-				rel="noopener noreferrer"
-				class="underline"
-				href="https://twitter.com/josedonato__">@jose-donato</a
-			>
-			and
-			<a
+			Data provided by <a
 				target="_blank"
 				rel="noopener noreferrer"
 				class="underline"
 				href="https://twitter.com/hotlapmode">@hotlapmode</a
-			>. Any question feel free to DM us on twitter. We are always open to hearing your feedback.
+			> and developed by <a
+				target="_blank"
+				rel="noopener noreferrer"
+				class="underline"
+				href="https://twitter.com/josedonato__">@jose-donato</a
+			> using SvelteKit, tailwindcss and DaisyUI. Any question feel free to DM us on twitter. We are always open to hearing your feedback.
 		</p>
 		<p class="opacity-70">Copyright © 2023 - All right reserved</p>
 	</div>
