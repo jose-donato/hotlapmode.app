@@ -22,16 +22,15 @@ export const GET: RequestHandler = async ({ url }) => {
 	if (!lineup) {
 		result = OGImage.render();
 	}
-	// get values for the lineup
 	const data = cache.get(lineup);
 	if (!data) {
 		result = OGImage.render();
-	}
-
-	if (team) {
-		result = OgTeam.render({ data });
 	} else {
-		result = Test.render({ data });
+		if (team) {
+			result = OgTeam.render({ data });
+		} else {
+			result = Test.render({ data });
+		}
 	}
 	const html = toReactElement(`${result.html}<style>${result.css.code}</style>`);
 	const svg = await satori(html, {
