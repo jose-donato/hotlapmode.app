@@ -18,18 +18,43 @@ const width = 1200;
 export const GET: RequestHandler = async ({ url }) => {
 	const lineup = url.searchParams.get('lineup') ?? undefined;
 	const team = url.searchParams.get('type') === 'teams' ?? false;
-	let result = '';
+	let result = null;
+	const cachedResult = cache.get('og-image');
 	if (!lineup) {
-		result = OGImage.render();
+		if (cachedResult) {
+			result = cachedResult;
+		} else {
+			result = OGImage.render();
+			cache.set('og-image', result);
+		}
 	}
 	const data = cache.get(lineup);
 	if (!data) {
-		result = OGImage.render();
+		if (cachedResult) {
+			result = cachedResult;
+		} else {
+			result = OGImage.render();
+			cache.set('og-image', result);
+		}
 	} else {
 		if (team) {
-			result = OgTeam.render({ data });
+			const teamData = cache.get(`og-image-team-${lineup}`);
+			if (teamData) {
+				console.log('cached teams lineup', lineup);
+				result = teamData;
+			} else {
+				result = OgTeam.render({ data });
+				cache.set(`og-image-team-${lineup}`, result);
+			}
 		} else {
-			result = Test.render({ data });
+			const driverData = cache.get(`og-image-driver-${lineup}`);
+			if (driverData) {
+				console.log('cached drivers lineup', lineup);
+				result = driverData;
+			} else {
+				result = Test.render({ data });
+				cache.set(`og-image-driver-${lineup}`, result);
+			}
 		}
 	}
 	const html = toReactElement(`${result.html}<style>${result.css.code}</style>`);

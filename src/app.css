@@ -17,3 +17,7 @@
 svg {
 	pointer-events: none;
 }
+
+html {
+	overflow-x: hidden;
+}

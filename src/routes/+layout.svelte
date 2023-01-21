@@ -58,7 +58,7 @@
 				class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-fit"
 			>
 				<li tabindex="0">
-					<a class="font-bold tracking-wide">
+					<div class="font-bold tracking-wide">
 						2022
 						<svg
 							class="fill-current"
@@ -68,7 +68,7 @@
 							viewBox="0 0 24 24"
 							><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg
 						>
-					</a>
+					</div>
 					<ul class="p-2 shadow-lg bg-base-100">
 						<li>
 							<a
@@ -170,7 +170,7 @@
 	<svelte:component this={ReloadPrompt} />
 {/if}
 <footer class="footer footer-center p-10 text-base-content">
-	<div class="max-w-[600px]">
+	<div class="max-w-[640px]">
 		<a
 			href="/"
 			class="lowercase font-bold btn btn-ghost text-xl relative bg-gradient-to-r bg-clip-text text-transparent from-primary via-second-red to-primary motion-reduce:animate-none animate-text"
