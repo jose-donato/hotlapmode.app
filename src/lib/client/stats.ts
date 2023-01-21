@@ -1,3 +1,5 @@
+import { browser } from '$app/environment';
+
 export function getTeamValues(data, driver1Name, driver2Name) {
 	let values1 = {};
 	let values2 = {};
@@ -15,10 +17,8 @@ export function getDriverValues(data, driver1Name, driver2Name) {
 	let values2 = {};
 	let values3 = {};
 	const key = Object.keys(data[0]).find((key) => key.includes('_'));
-	// check which driver comes first in key
-	//check if both driversNames are on key
 
-	const driver1First = key?.indexOf(driver1Name) < key?.indexOf(driver2Name);
+	//const driver1First = key?.indexOf(driver1Name) < key?.indexOf(driver2Name);
 	data.forEach((circuit) => {
 		if (circuit.Circuit !== 'TOTAL') {
 			values1[circuit.Circuit] = parseFloat(circuit[driver1Name]) || circuit[driver1Name];
@@ -59,16 +59,43 @@ export function getAllDriverData(qualiData, raceData, driversData, h2h) {
 		raceDataValues,
 		driversData
 	};
-	fetch('/save', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			lineup: `${driver1Name}_${driver2Name}`,
-			data
-		})
-	});
+	if (browser) {
+		fetch('/save', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				lineup: `${driver1Name}_${driver2Name}`,
+				data
+			})
+		});
+	}
+	return data;
+}
+
+export function getAllTeamData(qualiData, raceData, teamsData) {
+	const team1 = teamsData.team1Data.Team;
+	const team2 = teamsData.team2Data.Team;
+	const qualiDataValues = compareTeamValues(qualiData, team1, team2, 'Quali');
+	const raceDataValues = compareTeamValues(raceData, team1, team2, 'Race');
+	const data = {
+		qualiDataValues,
+		raceDataValues,
+		teamsData
+	};
+	if (browser)
+		fetch('/save', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				lineup: `${team1}_${team2}`,
+				data,
+				team: true
+			})
+		});
 	return data;
 }
 

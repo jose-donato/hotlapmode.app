@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageServerData } from './$types';
 	export let data: PageServerData;
+	import { page } from '$app/stores';
 	import { toPng } from 'html-to-image';
 
 	import Tabs from '$lib/ui/Tabs/Tabs.svelte';
@@ -10,14 +11,15 @@
 	import ComparisonTeam from '$lib/ui/ComparisonTeam.svelte';
 	import ComparisonTeamRace from '$lib/ui/ComparisonTeamRace.svelte';
 	import { fade } from 'svelte/transition';
-
+	const paramLineup = $page.url.searchParams.get('lineup');
+	let lineup = paramLineup ? paramLineup.split('_') : [];
 	let items = data.teams.values.map((team) => ({
 		value: team.Team,
 		label: team.Team
 	}));
 
-	let team1: string;
-	let team2: string;
+	let team1: string = items.find((item) => item.value === lineup[0])?.value || 'Select first team';
+	let team2: string = items.find((item) => item.value === lineup[1])?.value || 'Select second team';
 
 	let selectedId = 'h2h';
 
@@ -74,6 +76,10 @@
 	};
 	$: teamsData = getTeams(team1, team2);
 </script>
+
+<svelte:head>
+	<meta name="og:image" content={`https://hotlapmode.app/og?lineup=${team1}_${team2}&type=teams`} />
+</svelte:head>
 
 <div class="container mx-auto flex justify-center flex-col gap-6">
 	<div class="flex flex-col md:flex-row gap-4 mx-auto">
@@ -133,34 +139,75 @@
 		</TabPanel>
 	</Tabs>
 	{#if team1 !== undefined && team2 !== undefined && team1 !== 'Select first team' && team2 !== 'Select second team'}
-		<button
-			transition:fade
-			class="btn gap-2 w-fit mx-auto"
-			on:click={() =>
-				toPng(document.getElementById('comparison'), { cacheBust: true })
-					.then((dataUrl) => {
-						const link = document.createElement('a');
-						link.download = `comparison-${team1}-${team2}.png`;
-						link.href = dataUrl;
-						link.click();
-						link.remove();
-					})
-					.catch((err) => {
-						console.log(err);
-					})}
-		>
-			Download <svg
-				xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 24 24"
-				fill="currentColor"
-				class="w-6 h-6"
+		<div transition:fade class="flex gap-4 justify-center">
+			<button
+				class="btn gap-2 w-fit bg-base-300"
+				on:click={() =>
+					toPng(document.getElementById('comparison'), { cacheBust: true })
+						.then((dataUrl) => {
+							const link = document.createElement('a');
+							link.download = `comparison-${team1}-${team2}.png`;
+							link.href = dataUrl;
+							link.click();
+							link.remove();
+						})
+						.catch((err) => {
+							console.log(err);
+						})}
 			>
-				<path
-					fill-rule="evenodd"
-					d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
-					clip-rule="evenodd"
-				/>
-			</svg>
-		</button>
+				Download <svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+						clip-rule="evenodd"
+					/>
+				</svg>
+			</button>
+			<button
+				class="btn gap-2 w-fit bg-base-300"
+				on:click={() => {
+					const url = `https://hotlapmode.app/teams?lineup=${team1}_${team2}`.replaceAll(
+						' ',
+						'%20'
+					);
+					if (
+						/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+							navigator.userAgent
+						)
+					) {
+						if (navigator.share) {
+							navigator.share({
+								title: `hotlapmode - team comparison`,
+								text: `Comparison between ${team1} and ${team2}`,
+								url
+							});
+							return;
+						}
+					}
+					window.open(
+						`https://twitter.com/intent/tweet?text=Comparison between ${team1} and ${team2}&url=${url}`,
+						'_blank'
+					);
+				}}
+			>
+				Share <svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M15.75 4.5a3 3 0 11.825 2.066l-8.421 4.679a3.002 3.002 0 010 1.51l8.421 4.679a3 3 0 11-.729 1.31l-8.421-4.678a3 3 0 110-4.132l8.421-4.679a3 3 0 01-.096-.755z"
+						clip-rule="evenodd"
+					/>
+				</svg>
+			</button>
+		</div>
 	{/if}
 </div>

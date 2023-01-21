@@ -13,7 +13,7 @@
 </script>
 
 <div class="my-8">
-	<div class="flex gap-4 items-center justify-between" id="comparison">
+	<div class="flex gap-4 items-center justify-between bg-base-300/80" id="comparison">
 		<Driver
 			qualiPaceDriver={data.qualiDataValues.driver1}
 			racePaceDriver={data.raceDataValues.driver1}

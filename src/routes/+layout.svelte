@@ -83,7 +83,7 @@
 		</div>
 		<a
 			href="/"
-			class="lowercase font-bold btn btn-ghost text-xl bg-gradient-to-r bg-clip-text text-transparent  from-primary via-second-red to-primary motion-reduce:animate-none animate-text"
+			class="lowercase font-bold btn btn-ghost text-xl bg-gradient-to-r bg-clip-text text-transparent from-primary via-second-red to-primary motion-reduce:animate-none animate-text"
 		>
 			hotlapmode.app
 		</a>
@@ -129,7 +129,23 @@
 		</ul>
 	</div>
 	<div class="navbar-end">
-		<a class="btn btn-primary">Share</a>
+		<a
+			class="btn btn-primary hidden md:flex"
+			href="https://twitter.com/intent/tweet?text=Check%20out%20the%20new%20fastest%20way%20to%20compare%20F1%20drivers%20and%20teams%20today.%20Developed%20by%20%40josedonato__%20and%20%40hotlapmode&url=https%3A%2F%2Fhotlapmode.app"
+			>Share</a
+		>
+		<button
+			class="btn btn-primary md:hidden"
+			on:click={() => {
+				navigator.share({
+					title:
+						'Check out the new fastest way to compare F1 drivers and teams today. Developed by @josedonato__ and @hotlapmode',
+					url: 'https://hotlapmode.app'
+				});
+			}}
+		>
+			Share
+		</button>
 	</div>
 </header>
 

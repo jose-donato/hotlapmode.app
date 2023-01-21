@@ -7,7 +7,7 @@
 
 @layer components {
 	._card {
-		@apply shadow-xl backdrop-filter backdrop-blur-xl  bg-base-300/80 border-white/10 rounded border;
+		@apply shadow-xl backdrop-filter backdrop-blur-xl  bg-base-300 border-white/10 rounded border;
 	}
 	._icon-btn {
 		@apply btn btn-square btn-xs;

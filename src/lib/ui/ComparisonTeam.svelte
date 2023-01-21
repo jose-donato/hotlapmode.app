@@ -1,31 +1,19 @@
 <script lang="ts">
-	import { compareTeamValues } from '$lib/client/stats';
+	import { getAllTeamData } from '$lib/client/stats';
 	import Team from './Team.svelte';
 
 	export let teamsData;
 	export let qualiData;
 	export let raceData;
 
-	$: qualiTeamValues = compareTeamValues(
-		qualiData,
-		teamsData.team1Data.Team,
-		teamsData.team2Data.Team,
-		'Quali'
-	);
-
-	$: raceTeamValues = compareTeamValues(
-		raceData,
-		teamsData.team1Data.Team,
-		teamsData.team2Data.Team,
-		'Race'
-	);
+	$: data = getAllTeamData(qualiData, raceData, teamsData);
 </script>
 
 <div class="my-8">
-	<div class="flex gap-4 items-center justify-between" id="comparison">
+	<div class="flex gap-4 items-center justify-between bg-base-300/80" id="comparison">
 		<Team
-			qualiPaceTeam={qualiTeamValues.team1}
-			racePaceTeam={raceTeamValues.team1}
+			qualiPaceTeam={data.qualiDataValues.team1}
+			racePaceTeam={data.raceDataValues.team1}
 			team={teamsData.team1Data}
 		/>
 		<div class="lg:mx-10">
@@ -39,8 +27,8 @@
 			</div>
 		</div>
 		<Team
-			qualiPaceTeam={qualiTeamValues.team2}
-			racePaceTeam={raceTeamValues.team2}
+			qualiPaceTeam={data.qualiDataValues.team2}
+			racePaceTeam={data.raceDataValues.team2}
 			team={teamsData.team2Data}
 		/>
 	</div>
