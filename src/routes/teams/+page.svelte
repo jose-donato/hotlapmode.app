@@ -183,7 +183,7 @@
 						if (navigator.share) {
 							navigator.share({
 								title: `hotlapmode - team comparison`,
-								text: `Comparison between ${team1} and ${team2}`,
+								text: `Check out the F1 2022 team comparison between ${team1} and ${team2}`,
 								url
 							});
 							return;
@@ -191,7 +191,7 @@
 					}
 					window.open(
 						encodeURI(
-							`https://twitter.com/intent/tweet?text=Comparison between ${team1} and ${team2}&url=${url}`
+							`https://twitter.com/intent/tweet?text=Check out the F1 2022 team comparison between ${team1} and ${team2}&url=${url}`
 						),
 						'_blank'
 					);

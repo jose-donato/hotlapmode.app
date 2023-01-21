@@ -255,14 +255,14 @@
 						if (navigator.share) {
 							navigator.share({
 								title: `hotlapmode - driver comparison`,
-								text: `Comparison between ${driver1} and ${driver2}`,
+								text: `Check out the F1 2022 driver comparison between ${driver1} and ${driver2}`,
 								url: `https://hotlapmode.app/?lineup=${driver1}_${driver2}`
 							});
 							return;
 						}
 					}
 					window.open(
-						`https://twitter.com/intent/tweet?text=Comparison between ${driver1} and ${driver2}&url=https://hotlapmode.app/?lineup=${driver1}_${driver2}`,
+						`https://twitter.com/intent/tweet?text=Check out the F1 2022 driver comparison between ${driver1} and ${driver2}&url=https://hotlapmode.app/?lineup=${driver1}_${driver2}`,
 						'_blank'
 					);
 				}}
