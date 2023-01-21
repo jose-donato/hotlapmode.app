@@ -131,7 +131,8 @@
 						comparisons.
 					</p>
 					<p class="text-sm -mt-2">
-						If you want to compare drivers instead change to <a href="/" class="link">drivers tab</a
+						If you want to compare drivers instead change to <a href="/" class="link"
+							>drivers page</a
 						>
 					</p>
 				</div>
@@ -151,7 +152,8 @@
 						comparisons.
 					</p>
 					<p class="text-sm -mt-2">
-						If you want to compare drivers instead change to <a href="/" class="link">drivers tab</a
+						If you want to compare drivers instead change to <a href="/" class="link"
+							>drivers page</a
 						>
 					</p>
 				</div>
@@ -171,7 +173,8 @@
 						comparisons.
 					</p>
 					<p class="text-sm -mt-2">
-						If you want to compare drivers instead change to <a href="/" class="link">drivers tab</a
+						If you want to compare drivers instead change to <a href="/" class="link"
+							>drivers page</a
 						>
 					</p>
 				</div>
