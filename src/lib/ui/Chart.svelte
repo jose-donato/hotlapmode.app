@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script lang="ts">
 	import { Line } from 'svelte-chartjs';
 	import {
 		Chart as ChartJS,
