@@ -12,7 +12,7 @@
 	} from 'chart.js';
 	import type { ChartOptions } from 'chart.js';
 
-	import * as annotationPlugin from 'chartjs-plugin-annotation';
+	//import * as annotationPlugin from 'chartjs-plugin-annotation';
 
 	ChartJS.register(
 		Title,
@@ -21,8 +21,8 @@
 		LineElement,
 		LinearScale,
 		PointElement,
-		CategoryScale,
-		annotationPlugin
+		CategoryScale
+		//annotationPlugin
 	);
 
 	let chartOptions: ChartOptions<'line'> = {
@@ -32,7 +32,7 @@
 				labels: {
 					color: '#D3D3D3'
 				}
-			},
+			} /*
 			annotation: {
 				annotations: {
 					line1: {
@@ -48,7 +48,7 @@
 						}
 					}
 				}
-			}
+			}*/
 		},
 		scales: {
 			x: {
