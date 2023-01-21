@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { useRegisterSW } from 'virtual:pwa-register/svelte';
 	const { needRefresh, updateServiceWorker, offlineReady } = useRegisterSW({
@@ -24,7 +25,7 @@
 {#if toast}
 	<div
 		transition:fade
-		class="fixed right-4 bottom-4 alert border border-white/10 shadow-lg w-fit"
+		class="fixed left-3 lg:right-4 top-3 lg:top-auto lg:bottom-4 lg:left-auto z-10 alert border border-white/10 shadow-lg w-[90vw] lg:w-fit"
 		role="alert"
 	>
 		<div class="message">
