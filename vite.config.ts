@@ -1,4 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import fs from 'fs';
 import type { UserConfig } from 'vite';
 
@@ -15,7 +16,7 @@ function rawFonts(ext) {
 }
 
 const config: UserConfig = {
-	plugins: [sveltekit(), rawFonts(['.ttf'])]
+	plugins: [sveltekit(), rawFonts(['.ttf']), SvelteKitPWA()]
 };
 
 export default config;

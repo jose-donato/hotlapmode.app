@@ -9,33 +9,41 @@
 	const circuits = raceData.map((q) => q.Circuit);
 	const driver1Name = driversData.driver1Data.Driver;
 	const driver2Name = driversData.driver2Data.Driver;
-	const qualiDrivers = getDriverValues(raceData, driver1Name, driver2Name);
-	//const qualiDriverValues = compareValues(qualiDrivers[0], qualiDrivers[1]);
 
-	const h2hQualiData = circuits.map((circuit) => {
-		const driver1Laptime = qualiDrivers[0][circuit];
-		const driver2Laptime = qualiDrivers[1][circuit];
-		const difference =
-			driver1Laptime > 0 && driver2Laptime > 0 ? (driver1Laptime / driver2Laptime - 1) * 100 : '-';
+	function getH2HQualiData(data, driver1, driver2) {
+		const qualiDrivers = getDriverValues(data, driver1, driver2);
+		//const qualiDriverValues = compareValues(qualiDrivers[0], qualiDrivers[1]);
 
-		const data = {
-			Circuit: circuit,
-			differenceValue: difference,
-			Difference: typeof difference === 'number' ? `${difference.toFixed(2)}%` : difference
-		};
-		data[driver1Name] = {
-			value: driver1Laptime,
-			color: typeof difference === 'number' ? (difference < 0 ? 'green' : 'red') : 'grey'
-		};
-		data[driver2Name] = {
-			value: driver2Laptime,
-			color: typeof difference === 'number' ? (difference > 0 ? 'green' : 'red') : 'grey'
-		};
-		return data;
-	});
+		const h2hQualiData = circuits.map((circuit) => {
+			const driver1Laptime = qualiDrivers[0][circuit];
+			const driver2Laptime = qualiDrivers[1][circuit];
+			const difference =
+				driver1Laptime > 0 && driver2Laptime > 0
+					? (driver1Laptime / driver2Laptime - 1) * 100
+					: '-';
+
+			const data = {
+				Circuit: circuit,
+				differenceValue: difference,
+				Difference: typeof difference === 'number' ? `${difference.toFixed(2)}%` : difference
+			};
+			data[driver1] = {
+				value: driver1Laptime,
+				color: typeof difference === 'number' ? (difference < 0 ? 'green' : 'red') : 'grey'
+			};
+			data[driver2] = {
+				value: driver2Laptime,
+				color: typeof difference === 'number' ? (difference > 0 ? 'green' : 'red') : 'grey'
+			};
+			return data;
+		});
+		return h2hQualiData;
+	}
+
+	$: h2hQualiData = getH2HQualiData(raceData, driver1Name, driver2Name);
 </script>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 w-full gap-2" id="comparison">
+<div class="grid grid-cols-1 lg:grid-cols-2 w-full" id="comparison">
 	<Table columns={['Circuit', driver1Name, driver2Name, 'Difference']} rows={h2hQualiData} />
 	<Chart
 		info={type === 'race'
@@ -45,7 +53,6 @@
 			labels: circuits,
 			datasets: [
 				{
-					fill: true,
 					lineTension: 0.3,
 					backgroundColor: '#dc2626',
 					borderColor: '#dc2626',

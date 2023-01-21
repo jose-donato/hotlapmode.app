@@ -8,9 +8,7 @@
 </script>
 
 {#if $selectedTab === id}
-	<div
-		class="lg:relative _card mt-10 p-0 max-h-[600px] overflow-y-auto xl:overflow-x-hidden rounded-lg"
-	>
+	<div class="_card mt-10 p-0 max-h-[600px] overflow-y-auto xl:overflow-x-hidden rounded-lg">
 		<slot />
 	</div>
 {/if}

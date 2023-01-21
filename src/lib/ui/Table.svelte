@@ -16,7 +16,7 @@
 {#if !rows}
 	<div class="text-center text-white text-sm">No data</div>
 {:else}
-	<div class="overflow-x-auto relative min-h-[400px]">
+	<div class="overflow-auto relative max-h-[300px] lg:min-h-[400px] lg:max-h-[570px]">
 		<table class="table table-zebra table-compact w-full">
 			<thead>
 				<tr>

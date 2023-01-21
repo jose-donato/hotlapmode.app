@@ -1,4 +1,4 @@
-<script lang="ts">
+<script context="module" lang="ts">
 	import { Line } from 'svelte-chartjs';
 	import {
 		Chart as ChartJS,
@@ -12,7 +12,18 @@
 	} from 'chart.js';
 	import type { ChartOptions } from 'chart.js';
 
-	ChartJS.register(Title, Tooltip, Legend, LineElement, LinearScale, PointElement, CategoryScale);
+	import * as annotationPlugin from 'chartjs-plugin-annotation';
+
+	ChartJS.register(
+		Title,
+		Tooltip,
+		Legend,
+		LineElement,
+		LinearScale,
+		PointElement,
+		CategoryScale,
+		annotationPlugin
+	);
 
 	let chartOptions: ChartOptions<'line'> = {
 		responsive: true,
@@ -20,6 +31,22 @@
 			legend: {
 				labels: {
 					color: '#D3D3D3'
+				}
+			},
+			annotation: {
+				annotations: {
+					line1: {
+						type: 'line',
+						scaleID: 'y',
+						value: 0,
+						borderColor: '#D3D3D3',
+						borderWidth: 2,
+						label: {
+							backgroundColor: '#D3D3D3',
+							content: '0%',
+							position: 'center'
+						}
+					}
 				}
 			}
 		},
@@ -38,6 +65,8 @@
 				ticks: {
 					color: '#D3D3D3'
 				},
+				suggestedMin: 2,
+				suggestedMax: -2,
 				title: {
 					display: true,
 					text: 'Difference in %',
@@ -51,7 +80,7 @@
 	export let info: string;
 </script>
 
-<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-6 my-6 lg:my-0">
 	<div class="mt-2">
 		<Line {data} options={chartOptions} />
 	</div>

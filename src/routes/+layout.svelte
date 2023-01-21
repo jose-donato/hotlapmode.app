@@ -7,7 +7,36 @@
 	let path;
 
 	$: path = $page.url.pathname;
+
+	import { onMount } from 'svelte';
+	import { pwaInfo } from 'virtual:pwa-info';
+
+	onMount(async () => {
+		if (pwaInfo) {
+			const { registerSW } = await import('virtual:pwa-register');
+			registerSW({
+				immediate: true,
+				onRegistered(r) {
+					// uncomment following code if you want check for updates
+					// r && setInterval(() => {
+					//    console.log('Checking for sw update')
+					//    r.update()
+					// }, 20000 /* 20s for testing purposes */)
+					console.log(`SW Registered: ${r}`);
+				},
+				onRegisterError(error) {
+					console.log('SW registration error', error);
+				}
+			});
+		}
+	});
+
+	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
+
+<svelte:head>
+	{@html webManifest}
+</svelte:head>
 
 <div class="absolute inset-0 -z-10 mx-0 max-w-none overflow-hidden">
 	<div
@@ -173,8 +202,8 @@
 				rel="noopener noreferrer"
 				class="underline"
 				href="https://twitter.com/josedonato__">@jose-donato</a
-			> using SvelteKit, tailwindcss and DaisyUI. Any question feel free to DM us on twitter. We are
-			always open to hearing your feedback.
+			> using SvelteKit and DaisyUI. Any question feel free to DM us on twitter. We are always open to
+			hearing your feedback.
 		</p>
 		<p class="opacity-70">Copyright © 2023 - All right reserved</p>
 	</div>
