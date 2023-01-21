@@ -10,8 +10,10 @@
 		<link rel="icon" type="image/x-icon" href="%sveltekit.assets%/favicon.ico">
 		<script src="https://getinsights.io/js/insights.js"></script>
 		<script>
-		insights.init('IbvtJs3YFJnf01fz');
-		insights.trackPages();
+			if(insights) {
+				insights?.init('IbvtJs3YFJnf01fz');
+				insights.trackPages();
+			}
 		</script>
 		%sveltekit.head%
 	</head>
