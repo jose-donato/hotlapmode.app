@@ -9,9 +9,9 @@
 	const { selectedTab, selectTab } = getContext(tabContextId);
 </script>
 
-<div class="tooltip tooltip-bottom" data-tip={tooltip}>
+<div class="tooltip tooltip-bottom h-full w-1/3" data-tip={tooltip}>
 	<button
-		class={clsx('tab', {
+		class={clsx('tab h-full w-full whitespace-nowrap', {
 			'tab-active': $selectedTab === id
 		})}
 		on:click={() => {

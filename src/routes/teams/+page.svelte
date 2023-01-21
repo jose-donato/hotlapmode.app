@@ -103,19 +103,19 @@
 </svelte:head>
 
 <div class="container mx-auto flex justify-center flex-col gap-6">
-	<div class="flex flex-col md:flex-row gap-4 mx-auto">
-		<div class="flex flex-col gap-2">
+	<div class="flex flex-col md:flex-row gap-4 mx-auto w-full lg:w-[405px]">
+		<div class="flex flex-col gap-2 lg:w-1/2">
 			<label for="team1">Team 1</label>
-			<select id="team1" class="select select-bordered w-full max-w-xs" bind:value={team1}>
+			<select id="team1" class="select select-bordered w-full lg:max-w-xs" bind:value={team1}>
 				<option disabled selected>Select first team</option>
 				{#each items as item}
 					<option disabled={team2 === item.value} value={item.value}>{item.label}</option>
 				{/each}
 			</select>
 		</div>
-		<div class="flex flex-col gap-2">
+		<div class="flex flex-col gap-2 lg:w-1/2">
 			<label for="team2">Team 2</label>
-			<select id="team2" class="select select-bordered w-full max-w-xs" bind:value={team2}>
+			<select id="team2" class="select select-bordered w-full lg:max-w-xs" bind:value={team2}>
 				<option disabled selected>Select second team</option>
 
 				{#each items as item}

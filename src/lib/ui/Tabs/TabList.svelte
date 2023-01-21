@@ -1,3 +1,3 @@
-<div class="tabs tabs-boxed lg:w-[355px] mx-auto justify-center py-2.5 border-white/10 border">
+<div class="tabs tabs-boxed lg:w-[405px] h-[48px] mx-auto justify-between border-white/10 border">
 	<slot />
 </div>
