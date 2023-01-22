@@ -3,7 +3,7 @@
 >
 	<div style="display: flex; align-items: center; justify-content: center;" />
 	<div style="display: flex; margin-top: -160px; line-height: 1.8; white-space: pre-wrap;">
-		<img src="http://localhost:5173/images/hlm.png" style="width: 400px; height: 400px;" />
+		<img src="https://hotlapmode.app/images/hlm.png" style="width: 400px; height: 400px;" />
 	</div>
 	<p class="-mt-32 text-3xl font-bold">
 		Compare the performance of Formula 1 drivers and teams today
