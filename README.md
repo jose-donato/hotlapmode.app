@@ -1,38 +1,68 @@
-# create-svelte
+<!-- PROJECT LOGO -->
+<p align="center" style="margin-top: -80px;">
+  <a href="https://www.hotlapmode.app/">
+   <img src="https://www.hotlapmode.app/images/hlm.png" alt="Logo">
+  </a>
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+  <h3 align="center" style="margin-top: -100px;"><a href="https://hotlapmode.app/"><strong>hotlapmode.app</strong></a></h3>
 
-## Creating a project
+  <p align="center">
+    An interactive website where you can discover everything you need to know about f1 driver/team comparisons and more!
+    <br />
+    <a href="https://hotlapmode.app/"><strong>View more »</strong></a>
+</p>
 
-If you're seeing this, you've probably already done this step. Congrats!
+## About The Project
+
+[hotlapmode.app](https://hotlapmode.app) is an interactive website where you can discover everything you need to know about teammate comparisons and more! Through various functions within the website Formula 1 fans will now have a more accurate insight in the pace differences between drivers and teams. And more is to come!
+
+### Built With
+
+- [SvelteKit](https://kit.svelte.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [DaisyUI](https://daisyui.com/)
+- [ChartJS](https://www.chartjs.org/)
+- [Vite](https://vitejs.dev/)
+- [lru-cache](https://www.npmjs.com/package/lru-cache)
+- [satori-html](https://www.npmjs.com/package/satori-html) - for url previews
+- [google-spreadsheet](https://www.npmjs.com/package/google-spreadsheet) - to get the data from the google sheet
+
+Deployed on [Vercel](https://vercel.com/)
+
+## Getting started
+
+### Prerequisites
+
+What you need to run it locally:
+
+- Node.js 16.0.0 or higher (https://nodejs.org/en/download/)
+
+Create a .env file in the root of the project and add the following:
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+SPREADSHEET_ID=''
+GOOGLE_SHEETS_CLIENT_EMAIL=''
+GOOGLE_SHEETS_PRIVATE_KEY=''
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Run locally
 
 ```bash
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+### Deployment
 
-To create a production version of your app:
+The project is deployed on [Vercel](https://vercel.com/). When you push to the prod branch, Vercel will automatically deploy the project.
 
-```bash
-npm run build
-```
+## Contributing
 
-You can preview the production build with `npm run preview`.
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
