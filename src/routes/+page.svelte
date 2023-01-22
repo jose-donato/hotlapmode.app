@@ -122,21 +122,6 @@
 		driver1 = 'Select first driver';
 		driver2 = 'Select second driver';
 	}
-
-	$: {
-		if (browser) {
-			if (driver1 !== 'Select first driver' && driver2 !== 'Select second driver') {
-				//console.log('trackEvent comparison-drivers', driver1, driver2);
-				window?.insights?.track({
-					id: 'comparison-drivers',
-					parameters: {
-						driver1,
-						driver2
-					}
-				});
-			}
-		}
-	}
 </script>
 
 <svelte:head>

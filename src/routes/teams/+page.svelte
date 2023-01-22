@@ -81,21 +81,6 @@
 		team1 = 'Select first team';
 		team2 = 'Select second team';
 	}
-
-	$: {
-		if (browser) {
-			if (team1 !== 'Select first team' && team2 !== 'Select second team') {
-				//console.log('trackEvent comparison-teams', team1, team2);
-				window?.insights?.track({
-					id: 'comparison-teams',
-					parameters: {
-						team1,
-						team2
-					}
-				});
-			}
-		}
-	}
 </script>
 
 <svelte:head>
