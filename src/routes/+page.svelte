@@ -144,7 +144,7 @@
 </svelte:head>
 
 <div class="container mx-auto flex justify-center flex-col gap-6">
-	<div class="flex flex-col md:flex-row gap-4 mx-auto">
+	<div class="flex flex-col md:flex-row gap-4 mx-auto w-full lg:w-[405px]">
 		<div class="flex flex-col gap-2 lg:w-1/2">
 			<label for="driver1">Driver 1</label>
 			<select id="driver1" class="select select-bordered w-full lg:max-w-xs" bind:value={driver1}>
