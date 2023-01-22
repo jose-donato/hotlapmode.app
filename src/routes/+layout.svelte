@@ -38,7 +38,7 @@
 >
 	<div class="navbar-start">
 		<div class="dropdown">
-			<label tabindex="0" class="btn btn-ghost lg:hidden">
+			<label tabindex="0" class="btn btn-ghost -mr-4 px-2 lg:hidden">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-5 w-5"
@@ -99,7 +99,7 @@
 			href="/"
 			class="lowercase font-bold btn btn-ghost text-xl bg-gradient-to-r bg-clip-text text-transparent from-primary via-second-red to-primary motion-reduce:animate-none animate-text"
 		>
-			hotlapmode.app
+			hotlapmode<span class="hidden lg:block">.app</span>
 		</a>
 	</div>
 	<div class="navbar-center hidden lg:flex">
@@ -142,14 +142,36 @@
 			</li>
 		</ul>
 	</div>
-	<div class="navbar-end">
+	<div class="navbar-end lg:gap-4">
+		<a
+			class="btn btn-ghost text-xs lg:text-base gap-2"
+			href="https://github.com/jose-donato/hotlapmode.app"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			Star us
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="currentColor"
+				class="w-6 h-6"
+			>
+				<path
+					fill-rule="evenodd"
+					d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+					clip-rule="evenodd"
+				/>
+			</svg>
+		</a>
 		<a
 			class="btn btn-primary hidden md:flex"
+			target="_blank"
+			rel="noopener noreferrer"
 			href="https://twitter.com/intent/tweet?text=Check%20out%20the%20new%20fastest%20way%20to%20compare%20F1%20drivers%20and%20teams%20today.%20Developed%20by%20%40josedonato__%20and%20%40hotlapmode&url=https%3A%2F%2Fhotlapmode.app"
 			>Share</a
 		>
 		<button
-			class="btn btn-primary md:hidden"
+			class="btn btn-primary text-xs lg:text-base md:hidden"
 			on:click={() => {
 				navigator.share({
 					title:
@@ -190,8 +212,14 @@
 				rel="noopener noreferrer"
 				class="underline"
 				href="https://twitter.com/josedonato__">@jose-donato</a
-			> using SvelteKit and DaisyUI. Any question feel free to DM us on twitter. We are always open to
-			hearing your feedback.
+			>
+			using SvelteKit and DaisyUI. All code is open source and available on
+			<a
+				target="_blank"
+				rel="noopener noreferrer"
+				class="underline"
+				href="https://github.com/jose-donato/hotlapmode.app">GitHub</a
+			>. Any question feel free to DM us on twitter. We are always open to hearing your feedback.
 		</p>
 		<p class="opacity-70">Copyright © 2023 - All right reserved</p>
 	</div>
