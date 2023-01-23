@@ -4,7 +4,7 @@
     Frequently Asked Questions
  </h1>
 
- <div tabindex="0" class="collapse collapse-arrow border border-base-300 border-red-500 bg-base-100 rounded-box">
+ <div tabindex="0" class="collapse collapse-arrow border border-base-300  bg-base-100 rounded-box border border-white/40 shadow-lg">
     <input type="checkbox" />
     <div class="collapse-title text-xl font-medium">
       How do we get the data?
@@ -13,7 +13,7 @@
       <p></p>
     </div>
   </div>
-  <div tabindex="0" class="collapse collapse-arrow border border-base-300 border-red-500 bg-base-100 rounded-box">
+  <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box border border-white/40 shadow-lg">
     <input type="checkbox" />
     <div class="collapse-title text-xl font-medium">
       What does the criteria mean? 
