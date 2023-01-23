@@ -125,7 +125,7 @@
 </script>
 
 <svelte:head>
-	<meta name="og:image" content={`https://hotlapmode.app/og?lineup=${driver1}_${driver2}`} />
+	<meta name="og:image" content={`https://hotlapmode.app/og?linemes we don't know in advance what kind of DOM element to render. <svelte:element> comes in handy here. Inup=${driver1}_${driver2}`} />
 </svelte:head>
 
 <div class="container mx-auto flex justify-center flex-col gap-6">
