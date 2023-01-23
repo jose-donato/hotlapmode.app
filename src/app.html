@@ -42,13 +42,12 @@
 			setTimeout(() => {
 				try {
 					if (!ackeeTracker) return;
-					window.ackeeInstance = ackeeTracker
-						.create('https://ackee-analytics-c7a7.vercel.app')
-						.record('7fa9b663-7448-4324-8071-1de53e03d3f9');
+					window.ackeeInstance = ackeeTracker.create('https://ackee-analytics-c7a7.vercel.app');
+					window.ackeeInstance.record('7fa9b663-7448-4324-8071-1de53e03d3f9');
 				} catch (e) {
 					console.log(e);
 				}
-			}, 300);
+			}, 500);
 		</script>
 		%sveltekit.head%
 	</head>
