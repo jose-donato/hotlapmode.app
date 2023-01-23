@@ -11,13 +11,17 @@
 	import ComparisonTeam from '$lib/ui/ComparisonTeam.svelte';
 	import ComparisonTeamRace from '$lib/ui/ComparisonTeamRace.svelte';
 	import { fade } from 'svelte/transition';
-	import { browser } from '$app/environment';
+	import Chart from '$lib/ui/Chart.svelte';
 	const paramLineup = $page.url.searchParams.get('lineup');
 	let lineup = paramLineup ? paramLineup.split('_') : [];
 	let items = data.teams.values.map((team) => ({
 		value: team.Team,
 		label: team.Team
 	}));
+
+	const circuits = data.teamsRacePace.values.map((q) => q.Circuit);
+	const teams = data.teamsRacePace.headerValues.slice(1);
+	console.log(teams);
 
 	let team1: string = items.find((item) => item.value === lineup[0])?.value || 'Select first team';
 	let team2: string = items.find((item) => item.value === lineup[1])?.value || 'Select second team';
@@ -81,6 +85,21 @@
 		team1 = 'Select first team';
 		team2 = 'Select second team';
 	}
+
+	console.log(data);
+
+	const colors = {
+		'Red Bull': '#0600ef',
+		Mercedes: '#00d2be',
+		McLaren: '#ff8700',
+		Ferrari: '#dc0000',
+		AlphaTauri: '#2b4562',
+		Alpine: '#0090ff',
+		Williams: '#005aff',
+		Haas: '#ffffff',
+		'Alfa Romeo': '#900000',
+		'Aston Martin': '#006f62'
+	};
 </script>
 
 <svelte:head>
@@ -272,3 +291,21 @@
 		</div>
 	{/if}
 </div>
+
+<Chart
+	yLabel="Lap time (s)"
+	data={{
+		labels: circuits,
+		datasets: teams.map((team) => {
+			return {
+				label: team,
+				data: data.teamsRacePace.values.map((teamData) => {
+					return parseFloat(teamData[team]);
+				}),
+				backgroundColor: colors[team],
+				borderColor: colors[team],
+				borderWidth: 1
+			};
+		})
+	}}
+/>

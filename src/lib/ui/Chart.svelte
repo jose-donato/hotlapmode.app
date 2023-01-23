@@ -12,6 +12,8 @@
 	} from 'chart.js';
 	import type { ChartOptions } from 'chart.js';
 
+	export let yLabel = 'Difference in %';
+
 	//import * as annotationPlugin from 'chartjs-plugin-annotation';
 
 	ChartJS.register(
@@ -67,7 +69,7 @@
 				},
 				title: {
 					display: true,
-					text: 'Difference in %',
+					text: yLabel,
 					color: '#D3D3D3'
 				}
 			}
