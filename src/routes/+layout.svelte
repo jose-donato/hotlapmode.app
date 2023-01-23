@@ -140,6 +140,11 @@
 					<span class="font-bold tracking-wide"> 2023 </span>
 				</div>
 			</li>
+			<li>
+				<div class="">
+					<a href="/qa" class="font-bold tracking-wide uppercase"> faq </a>
+				</div>
+			</li>
 		</ul>
 	</div>
 	<div class="navbar-end lg:gap-4">
