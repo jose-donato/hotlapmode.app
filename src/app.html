@@ -37,6 +37,19 @@
 			src="https://static.cloudflareinsights.com/beacon.min.js"
 			data-cf-beacon='{"token": "d84a7976c80e4354ba85a6a01379866e"}'
 		></script>
+		<script src="%sveltekit.assets%/js/ackee-tracker.js" defer></script>
+		<script defer>
+			setTimeout(() => {
+				try {
+					if (!ackeeTracker) return;
+					window.ackeeInstance = ackeeTracker
+						.create('https://ackee-analytics-c7a7.vercel.app')
+						.record('7fa9b663-7448-4324-8071-1de53e03d3f9');
+				} catch (e) {
+					console.log(e);
+				}
+			}, 300);
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

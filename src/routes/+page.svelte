@@ -122,6 +122,36 @@
 		driver1 = 'Select first driver';
 		driver2 = 'Select second driver';
 	}
+
+	$: {
+		if (browser) {
+			if (driver1 !== 'Select first driver') {
+				//console.log('trackEvent comparison-drivers', driver1, driver2);
+				if (window?.ackeeInstance) {
+					//console.log('trackEvent selected-driver', driver1, driver2);
+					window.ackeeInstance.action('dab99081-d14f-4d25-8532-798c07f5cd9a', {
+						key: driver1,
+						value: 1
+					});
+				}
+			}
+		}
+	}
+
+	$: {
+		if (browser) {
+			if (driver2 !== 'Select second driver') {
+				//console.log('trackEvent comparison-drivers', driver1, driver2);
+				if (window?.ackeeInstance) {
+					//console.log('trackEvent selected-driver', driver1, driver2);
+					window.ackeeInstance.action('dab99081-d14f-4d25-8532-798c07f5cd9a', {
+						key: driver2,
+						value: 1
+					});
+				}
+			}
+		}
+	}
 </script>
 
 <svelte:head>
