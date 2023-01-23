@@ -87,11 +87,13 @@
 			if (team1 !== 'Select first team') {
 				//console.log('trackEvent comparison-drivers', driver1, driver2);
 				if (window?.ackeeInstance) {
-					//console.log('trackEvent selected-driver', driver1, driver2);
-					window.ackeeInstance.action('639395e6-15df-4091-939a-81fabf0bbb95', {
-						key: team1,
-						value: 1
-					});
+					try {
+						//console.log('trackEvent selected-driver', driver1, driver2);
+						window.ackeeInstance.action('639395e6-15df-4091-939a-81fabf0bbb95', {
+							key: team1,
+							value: 1
+						});
+					} catch (e) {}
 				}
 			}
 		}
@@ -102,11 +104,13 @@
 			if (team2 !== 'Select second team') {
 				//console.log('trackEvent comparison-drivers', driver1, driver2);
 				if (window?.ackeeInstance) {
-					//console.log('trackEvent selected-driver', driver1, driver2);
-					window.ackeeInstance.action('639395e6-15df-4091-939a-81fabf0bbb95', {
-						key: team2,
-						value: 1
-					});
+					try {
+						//console.log('trackEvent selected-driver', driver1, driver2);
+						window.ackeeInstance.action('639395e6-15df-4091-939a-81fabf0bbb95', {
+							key: team2,
+							value: 1
+						});
+					} catch (e) {}
 				}
 			}
 		}
