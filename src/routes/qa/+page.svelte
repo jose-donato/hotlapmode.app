@@ -4,6 +4,7 @@
     Frequently Asked Questions
  </h1>
 
+
  <div tabindex="0" class="collapse collapse-arrow border border-base-300  bg-base-100 rounded-box border border-white/40 shadow-lg">
     <input type="checkbox" />
     <div class="collapse-title text-xl font-medium">
@@ -18,7 +19,7 @@
     <div class="collapse-title text-xl font-medium">
       What does the criteria mean? 
     </div>
-    <div class="collapse-content space-y-5 "> 
+    <div class="collapse-content space-y-5 mr-4"> 
       <p class="p-3">
         <strong class="">Media rating:</strong> media rating is an average between the ratings of three of the main Formula 1 related websites at the moment, Auto motor und Sport, CRASHnet and Autosport.
       </p>
