@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { PageServerData } from './$types';
 	export let data: PageServerData;
-    import SvelteMarkDown from 'svelte-markdown';
+    import {parse} from 'marked';
+    
 </script>
 
 <div class="container mx-auto flex justify-center flex-col gap-6">
@@ -18,9 +19,9 @@
       {question.question}
     </div>
     <div class="collapse-content">
-      <p class="text-base">
-        <SvelteMarkDown source={question.answer} />
-      </p>
+      
+        {@html parse(question.answer)}
+      
     </div>
     </div>
 
