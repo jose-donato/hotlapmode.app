@@ -93,6 +93,17 @@
 						<span class="font-bold tracking-wide float-left"> 2023 </span>
 					</div>
 				</li>
+				<li>
+					<div class="">
+						<a href="/blog" class="font-bold tracking-wide uppercase"> blog </a>
+					</div>
+				</li>
+				<li>
+					<div class="">
+						<a href="/qa" class="font-bold tracking-wide uppercase"> faq </a>
+					</div>
+				</li>
+				
 			</ul>
 		</div>
 		<a
@@ -136,10 +147,21 @@
 				</ul>
 			</li>
 			<li>
+				<div class="">
+					<a href="/blog" class="font-bold tracking-wide uppercase"> blog </a>
+				</div>
+			</li>
+			<li>
 				<div data-tip="Coming soon" class="tooltip tooltip-bottom cursor-wait">
 					<span class="font-bold tracking-wide"> 2023 </span>
 				</div>
+			</li><li>
+				<div class="">
+					<a href="/qa" class="font-bold tracking-wide uppercase"> faq </a>
+				</div>
 			</li>
+			
+			
 		</ul>
 	</div>
 	<div class="navbar-end lg:gap-4">

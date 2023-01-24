@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageServerData } from './$types';
 	export let data: PageServerData;
-	import SvelteMarkdown from 'svelte-markdown';
+	import {parse} from 'marked';
 </script>
 
 <div class="container mx-auto flex justify-center flex-col gap-6">
@@ -14,6 +14,6 @@
 	/>
 
 	<article class="prose prose-invert prose-xl mx-auto">
-		<SvelteMarkdown source={data.content} />
+		{@html parse(data.content)}
 	</article>
 </div>
