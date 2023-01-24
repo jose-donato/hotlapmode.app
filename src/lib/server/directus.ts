@@ -26,7 +26,3 @@ export async function getQuestions() {
 		return directusQuestions.data;
 }
 
-export async function getQuestion(id: number) {
-	const directusQuestion = await directus.items('Questions').readOne(id);
-	return directusQuestion;
-}

@@ -11,8 +11,9 @@
     Frequently Asked Questions
  </h1>
 
+ <div class="container mx-auto flex justify-center flex-col gap-6">
 
- {#each data.Questions as question}
+ {#each data.questions as question}
     <div tabindex="0" class="collapse collapse-arrow border border-base-300  bg-base-100 rounded-box border border-white/40 shadow-lg">
     <input type="checkbox" />
     <div class="collapse-title text-xl font-medium">
@@ -26,4 +27,5 @@
     </div>
 
 {/each}
+</div>
 </div>

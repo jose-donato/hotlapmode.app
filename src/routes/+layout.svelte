@@ -86,11 +86,26 @@
 								})}>Teams</a
 							>
 						</li>
+						<li>
+							<div class="">
+								<a href="/qa" class="font-bold tracking-wide uppercase"> faq </a>
+							</div>
+						</li>
+						<li>
+							<div class="">
+								<a href="/blog" class="font-bold tracking-wide uppercase"> blog </a>
+							</div>
+						</li>
 					</ul>
 				</li>
 				<li>
 					<div data-tip="Coming soon" class="tooltip tooltip-bottom cursor-wait">
 						<span class="font-bold tracking-wide float-left"> 2023 </span>
+					</div>
+				</li>
+				<li>
+					<div class="">
+						<a href="/qa" class="font-bold tracking-wide uppercase"> faq </a>
 					</div>
 				</li>
 			</ul>
@@ -139,10 +154,14 @@
 				<div data-tip="Coming soon" class="tooltip tooltip-bottom cursor-wait">
 					<span class="font-bold tracking-wide"> 2023 </span>
 				</div>
+			</li><li>
+				<div class="">
+					<a href="/qa" class="font-bold tracking-wide uppercase"> faq </a>
+				</div>
 			</li>
 			<li>
 				<div class="">
-					<a href="/qa" class="font-bold tracking-wide uppercase"> faq </a>
+					<a href="/blog" class="font-bold tracking-wide uppercase"> blog </a>
 				</div>
 			</li>
 		</ul>

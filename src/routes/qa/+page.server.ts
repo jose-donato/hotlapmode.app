@@ -2,8 +2,8 @@ import { getQuestions } from '$lib/server/directus';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ params }) => {
-	const Questions = await getQuestions();
+	const questions = await getQuestions();
 	return {
-		Questions
+		questions
 	};
 }) satisfies PageServerLoad;
