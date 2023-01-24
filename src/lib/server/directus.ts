@@ -20,3 +20,13 @@ export async function getThread(id: number) {
 	const directusThread = await directus.items('Threads').readOne(id);
 	return directusThread;
 }
+
+export async function getQuestions() {
+		const directusQuestions = await directus.items('Questions').readByQuery();
+		return directusQuestions.data;
+}
+
+export async function getQuestion(id: number) {
+	const directusQuestion = await directus.items('Questions').readOne(id);
+	return directusQuestion;
+}
