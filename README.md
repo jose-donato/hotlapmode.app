@@ -26,7 +26,7 @@
 - [lru-cache](https://www.npmjs.com/package/lru-cache)
 - [satori-html](https://www.npmjs.com/package/satori-html) - for url previews
 - [google-spreadsheet](https://www.npmjs.com/package/google-spreadsheet) - to get the data from the google sheet
-- [cloudflare web analytics](https://www.cloudflare.com/web-analytics/)
+- [ackee](https://ackee.electerious.com/) - for analytics
 
 Deployed on [Vercel](https://vercel.com/)
 
