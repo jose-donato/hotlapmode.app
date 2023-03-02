@@ -88,10 +88,36 @@
 						</li>
 					</ul>
 				</li>
-				<li>
-					<div data-tip="Coming soon" class="tooltip tooltip-bottom cursor-wait">
-						<span class="font-bold tracking-wide float-left"> 2023 </span>
+				<li tabindex="0">
+					<div class="font-bold tracking-wide">
+						2023
+						<svg
+							class="fill-current"
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg
+						>
 					</div>
+					<ul class="p-2 shadow-lg bg-base-100">
+						<li>
+							<a
+								href="/2023"
+								class={clsx('font-bold tracking-wide text', {
+									underline: path === '/'
+								})}>Drivers</a
+							>
+						</li>
+						<li>
+							<a
+								href="/2023/teams"
+								class={clsx('font-bold tracking-wide', {
+									underline: path === '/teams'
+								})}>Teams</a
+							>
+						</li>
+					</ul>
 				</li>
 				<li>
 					<div class="">
@@ -100,10 +126,9 @@
 				</li>
 				<li>
 					<div class="">
-						<a href="/qa" class="font-bold tracking-wide uppercase"> faq </a>
+						<a href="/faq" class="font-bold tracking-wide uppercase"> faq </a>
 					</div>
 				</li>
-				
 			</ul>
 		</div>
 		<a
@@ -146,11 +171,37 @@
 					</li>
 				</ul>
 			</li>
-			
-			<li>
-				<div data-tip="Coming soon" class="tooltip tooltip-bottom cursor-wait">
-					<span class="font-bold tracking-wide"> 2023 </span>
+
+			<li tabindex="0">
+				<div class="font-bold tracking-wide">
+					2023
+					<svg
+						class="fill-current"
+						xmlns="http://www.w3.org/2000/svg"
+						width="20"
+						height="20"
+						viewBox="0 0 24 24"
+						><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg
+					>
 				</div>
+				<ul class="p-2 shadow-lg bg-base-100">
+					<li>
+						<a
+							href="/2023"
+							class={clsx('font-bold tracking-wide', {
+								underline: path === '/'
+							})}>Drivers</a
+						>
+					</li>
+					<li>
+						<a
+							href="/2023/teams"
+							class={clsx('font-bold tracking-wide', {
+								underline: path === '/teams'
+							})}>Teams</a
+						>
+					</li>
+				</ul>
 			</li>
 			<li>
 				<div class="">
@@ -159,11 +210,9 @@
 			</li>
 			<li>
 				<div class="">
-					<a href="/qa" class="font-bold tracking-wide uppercase"> faq </a>
+					<a href="/faq" class="font-bold tracking-wide uppercase"> faq </a>
 				</div>
 			</li>
-			
-			
 		</ul>
 	</div>
 	<div class="navbar-end lg:gap-4">

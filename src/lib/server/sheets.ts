@@ -1,8 +1,8 @@
 import { env } from '$env/dynamic/private';
 import { GoogleSpreadsheet, GoogleSpreadsheetWorksheet } from 'google-spreadsheet';
 
-export async function authenticateSheet() {
-	const doc = new GoogleSpreadsheet(env.SPREADSHEET_ID);
+export async function authenticateSheet(id: string = env.SPREADSHEET_ID) {
+	const doc = new GoogleSpreadsheet(id);
 	await doc.useServiceAccountAuth({
 		client_email: env.GOOGLE_SHEETS_CLIENT_EMAIL,
 		private_key: env.GOOGLE_SHEETS_PRIVATE_KEY.split(String.raw`\n`).join('\n')
