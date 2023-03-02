@@ -7,7 +7,7 @@
 <div class="container mx-auto flex justify-center flex-col gap-6">
 	<h1 class="text-center text-3xl pb-10">Frequently Asked Questions</h1>
 
-	<div class="container mx-auto flex justify-center flex-col gap-6">
+	<div class="container mx-auto flex justify-center flex-col gap-6 max-w-[600px]">
 		{#each data.questions as question}
 			<div
 				tabindex="0"
