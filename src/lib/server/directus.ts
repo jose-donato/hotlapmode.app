@@ -12,7 +12,14 @@ export async function getDirectusClient() {
 }
 
 export async function getThreads() {
-	const directusThreads = await directus.items('Threads').readByQuery();
+	const directusThreads = await directus.items('Threads').readByQuery({
+		limit: -1,
+		filter: {
+			status: {
+				_eq: 'published'
+			}
+		}
+	});
 	return directusThreads.data;
 }
 
@@ -22,7 +29,13 @@ export async function getThread(id: number) {
 }
 
 export async function getQuestions() {
-		const directusQuestions = await directus.items('Questions').readByQuery();
-		return directusQuestions.data;
+	const directusQuestions = await directus.items('Questions').readByQuery({
+		limit: -1,
+		filter: {
+			status: {
+				_eq: 'published'
+			}
+		}
+	});
+	return directusQuestions.data;
 }
-
