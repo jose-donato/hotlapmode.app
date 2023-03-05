@@ -19,7 +19,7 @@ export async function getThreads() {
 				_eq: 'published'
 			}
 		},
-		sort: ['-created_on']
+		sort: ['-date_created']
 	});
 	return directusThreads.data;
 }
@@ -36,7 +36,7 @@ export async function getThread(id: number) {
 				_nin: [id]
 			}
 		},
-		sort: ['-created_on']
+		sort: ['-date_created']
 	});
 	directusThread.recentThreads = recentThreads.data;
 	return directusThread;
@@ -50,7 +50,7 @@ export async function getQuestions() {
 				_eq: 'published'
 			}
 		},
-		sort: ['-created_on']
+		sort: ['-date_created']
 	});
 	return directusQuestions.data;
 }
