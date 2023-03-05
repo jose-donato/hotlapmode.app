@@ -18,7 +18,8 @@ export async function getThreads() {
 			status: {
 				_eq: 'published'
 			}
-		}
+		},
+		sort: ['-created_on']
 	});
 	return directusThreads.data;
 }
@@ -34,7 +35,8 @@ export async function getThread(id: number) {
 			id: {
 				_nin: [id]
 			}
-		}
+		},
+		sort: ['-created_on']
 	});
 	directusThread.recentThreads = recentThreads.data;
 	return directusThread;
@@ -47,7 +49,8 @@ export async function getQuestions() {
 			status: {
 				_eq: 'published'
 			}
-		}
+		},
+		sort: ['-created_on']
 	});
 	return directusQuestions.data;
 }
