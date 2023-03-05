@@ -25,6 +25,18 @@ export async function getThreads() {
 
 export async function getThread(id: number) {
 	const directusThread = await directus.items('Threads').readOne(id);
+	const recentThreads = await directus.items('Threads').readByQuery({
+		limit: 5,
+		filter: {
+			status: {
+				_eq: 'published'
+			},
+			id: {
+				_nin: [id]
+			}
+		}
+	});
+	directusThread.recentThreads = recentThreads.data;
 	return directusThread;
 }
 
