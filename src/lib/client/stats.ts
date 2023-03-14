@@ -16,7 +16,9 @@ export function getDriverValues(data, driver1Name, driver2Name) {
 	let values1 = {};
 	let values2 = {};
 	let values3 = {};
-	const key = Object.keys(data[0]).find((key) => key.includes('_'));
+	const key = Object.keys(data[0]).find(
+		(key) => key.includes('_') && !key.includes('BEST') && !key.includes('H2H')
+	);
 
 	//const driver1First = key?.indexOf(driver1Name) < key?.indexOf(driver2Name);
 	data.forEach((circuit) => {

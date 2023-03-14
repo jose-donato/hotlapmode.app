@@ -3,6 +3,7 @@
 
 	import type { PageServerData } from './$types';
 	export let data: PageServerData;
+
 	import { toPng } from 'html-to-image';
 
 	import Comparison from '$lib/ui/Comparison.svelte';
@@ -61,17 +62,17 @@
 		/*let driver1HLM = parseFloat(driver1Data['HLM Rating']);
 		let driver2HLM = parseFloat(driver2Data['HLM Rating']);
 		let driver1Media = parseFloat(driver1Data['Media Rating']);
-		let driver2Media = parseFloat(driver2Data['Media Rating']);
+		let driver2Media = parseFloat(driver2Data['Media Rating']);*/
 		driver1Data = {
 			...driver1Data,
-			hlmRating: {
+			/*hlmRating: {
 				value: driver1HLM,
 				diff: driver1HLM - driver2HLM
 			},
 			mediaRating: {
 				value: driver1Media,
 				diff: driver1Media - driver2Media
-			},
+			},*/
 			points: {
 				value: driver1Data['points'],
 				diff: driver1Data['points'] - driver2Data['points']
@@ -88,14 +89,14 @@
 
 		driver2Data = {
 			...driver2Data,
-			hlmRating: {
+			/*hlmRating: {
 				value: driver2HLM,
 				diff: driver2HLM - driver1HLM
 			},
 			mediaRating: {
 				value: driver2Media,
 				diff: driver2Media - driver1Media
-			},
+			},*/
 			points: {
 				value: driver2Data['points'],
 				diff: driver2Data['points'] - driver1Data['points'].value
@@ -108,7 +109,7 @@
 				value: driver2Data['position'],
 				diff: driver1Data['position'].value - driver2Data['position']
 			}
-		};*/
+		};
 
 		return {
 			driver1Data,
@@ -226,78 +227,61 @@
 				</div>
 			</div>
 		{/if}
-		<div class="_card mt-10 p-4 max-w-[300px] mx-auto text-center rounded-lg">
+		<!--<div class="_card mt-10 p-4 max-w-[300px] mx-auto text-center rounded-lg">
 			Almost there, it's race week!
-		</div>
+		</div>-->
 
-		<!--
-
-			<TabPanel id="h2h">
-				{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
+		<TabPanel id="h2h">
+			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
 				<Comparison
-				h2h={data.h2h}
-				{driversData}
-				qualiData={data.quali.values}
-				raceData={data.race.values}
+					showMediaRatings={false}
+					h2h={data.h2h}
+					{driversData}
+					qualiData={data.quali.values}
+					raceData={data.race.values}
 				/>
-				{:else}
+			{:else}
 				<div class="text-center py-4 space-y-2">
 					<h2>Select two drivers from the boxes above</h2>
 					<p class="text-sm">
 						You will be able to see an overall comparison between them, and more detailed Quali/Race
 						comparisons.
 					</p>
-					<p class="text-sm -mt-2">
-						If you want to compare teams instead change to <a href="/teams" class="link"
-						>teams page</a
-						>
-					</p>
 				</div>
-				{/if}
-			</TabPanel>
-			
-			<TabPanel id="quali">
-				{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
+			{/if}
+		</TabPanel>
+
+		<TabPanel id="quali">
+			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
 				{#key driversData}
-				<ComparisonRace raceData={data.quali.values} {driversData} />
+					<ComparisonRace raceData={data.quali.values} {driversData} />
 				{/key}
-				{:else}
+			{:else}
 				<div class="text-center py-4 space-y-2">
 					<h2>Select two drivers from the boxes above</h2>
 					<p class="text-sm">
 						You will be able to see an overall comparison between them, and more detailed Quali/Race
 						comparisons.
 					</p>
-					<p class="text-sm -mt-2">
-						If you want to compare teams instead change to <a href="/teams" class="link"
-						>teams page</a
-						>
-					</p>
 				</div>
-				{/if}
-			</TabPanel>
-			
-			<TabPanel id="race">
-				{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
+			{/if}
+		</TabPanel>
+
+		<TabPanel id="race">
+			{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
 				{#key driversData}
-				<ComparisonRace type="race" raceData={data.race.values} {driversData} />
+					<ComparisonRace type="race" raceData={data.race.values} {driversData} />
 				{/key}
-				{:else}
+			{:else}
 				<div class="text-center py-4 space-y-2">
 					<h2>Select two drivers from the boxes above</h2>
 					<p class="text-sm">
 						You will be able to see an overall comparison between them, and more detailed Quali/Race
 						comparisons.
 					</p>
-					<p class="text-sm -mt-2">
-						If you want to compare teams instead change to <a href="/teams" class="link"
-						>teams page</a
-						>
-					</p>
 				</div>
-				{/if}
-			</TabPanel>
-		-->
+			{/if}
+		</TabPanel>
 	</Tabs>
 	{#if driver1 !== undefined && driver2 !== undefined && driver1 !== 'Select first driver' && driver2 !== 'Select second driver'}
 		<div transition:fade class="flex gap-4 justify-center">

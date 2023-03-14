@@ -5,7 +5,7 @@ import { authenticateSheet, getSheetData } from '$lib/server/sheets';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ params }) => {
-	const cached = cache.get('data');
+	const cached = cache.get('data-2023');
 	if (cached) {
 		return cached;
 	}
@@ -13,17 +13,17 @@ export const load = (async ({ params }) => {
 	const driversSheet = doc.sheetsByTitle['Driver Details'];
 	const drivers = await getSheetData(driversSheet);
 
-	/*const qualiSheet = doc.sheetsByTitle['Quali In Detail'];
-	const raceSheet = doc.sheetsByTitle['Race In Detail'];
+	const qualiSheet = doc.sheetsByTitle['(1) Quali In Detail'];
+	const quali = await getSheetData(qualiSheet);
+	const raceSheet = doc.sheetsByTitle['(1) Race In Detail'];
+	const race = await getSheetData(raceSheet);
 
 	const h2hSheet = doc.sheetsByTitle['H2H'];
-	const quali = await getSheetData(qualiSheet);
-	const race = await getSheetData(raceSheet);
 	const h2h = await getSheetData(h2hSheet);
 
 	const h2hData = transformH2HArr(h2h.values);
 
-	const driverStandings = await getDriverStandings();
+	const driverStandings = await getDriverStandings(2023, 1);
 
 	drivers.values.forEach((driver: any) => {
 		const driverStanding = driverStandings.find((standing: any) =>
@@ -34,16 +34,15 @@ export const load = (async ({ params }) => {
 			driver.points = parseInt(driverStanding.points);
 			driver.wins = parseInt(driverStanding.wins);
 		}
-	});*/
+	});
 
 	const data = {
-		drivers
-		/*
+		drivers,
 		quali,
 		race,
-		h2h: h2hData*/
+		h2h: h2hData
 	};
-	cache.set('data', data);
+	cache.set('data-2023', data);
 	return data;
 }) satisfies PageServerLoad;
 

@@ -10,6 +10,7 @@
 	export let driver: driverType;
 	export let qualiPaceDriver;
 	export let racePaceDriver;
+	export let showMediaRatings = true;
 
 	async function callApi(url: string) {
 		const response = await fetch('/api?url=' + url);
@@ -35,22 +36,24 @@
 		</div>
 	</div>
 	<div class="text-center uppercase text-sm lg:text-xl font-bold space-y-2">
-		<p
-			class={clsx({
-				'text-green-500': driver.mediaRating.diff > 0,
-				'text-red-500': driver.mediaRating.diff < 0
-			})}
-		>
-			{driver.mediaRating.value}
-		</p>
-		<p
-			class={clsx({
-				'text-green-500': driver.hlmRating.diff > 0,
-				'text-red-500': driver.hlmRating.diff < 0
-			})}
-		>
-			{driver.hlmRating.value}
-		</p>
+		{#if showMediaRatings}
+			<p
+				class={clsx({
+					'text-green-500': driver.mediaRating.diff > 0,
+					'text-red-500': driver.mediaRating.diff < 0
+				})}
+			>
+				{driver.mediaRating.value}
+			</p>
+			<p
+				class={clsx({
+					'text-green-500': driver.hlmRating.diff > 0,
+					'text-red-500': driver.hlmRating.diff < 0
+				})}
+			>
+				{driver.hlmRating.value}
+			</p>
+		{/if}
 		<p
 			class={clsx({
 				'text-green-500': qualiPaceDriver.ahead.diff < 0,

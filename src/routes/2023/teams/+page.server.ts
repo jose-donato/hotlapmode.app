@@ -5,7 +5,7 @@ import { authenticateSheet, getSheetData } from '$lib/server/sheets';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ params }) => {
-	const cached = cache.get('teams-data');
+	const cached = cache.get('teams-data-2023');
 	if (cached) {
 		return cached;
 	}
@@ -39,6 +39,6 @@ export const load = (async ({ params }) => {
 		teamsQualiPace
         */
 	};
-	cache.set('teams-data', data);
+	cache.set('teams-data-2023', data);
 	return data;
 }) satisfies PageServerLoad;
