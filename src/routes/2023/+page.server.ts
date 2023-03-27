@@ -18,7 +18,7 @@ export const load = (async ({ params }) => {
 	const raceSheet = doc.sheetsByTitle['(1) Race In Detail'];
 	const race = await getSheetData(raceSheet);
 
-	const h2hSheet = doc.sheetsByTitle['H2H'];
+	const h2hSheet = doc.sheetsByTitle['(hlm.app) H2H'];
 	const h2h = await getSheetData(h2hSheet);
 
 	const h2hData = transformH2HArr(h2h.values);
