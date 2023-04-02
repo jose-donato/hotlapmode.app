@@ -3,15 +3,47 @@
 	import clsx from 'clsx';
 	import type { PageServerData } from './$types';
 	export let data: PageServerData;
-	console.log(data);
 
-	let chartData = {
+	const options = [
+		{
+			label: '5',
+			value: 5
+		},
+		{
+			label: '10',
+			value: 10
+		},
+		{
+			label: '15',
+			value: 15
+		},
+		{
+			label: '20',
+			value: 20
+		}
+	];
+
+	let selectedOption = 20;
+	let removeOutliersSelected = false;
+
+	function removeOutliers(arr: number[]) {
+		const values = arr.concat();
+		values.sort((a, b) => a - b);
+		const q1 = values[Math.floor(values.length / 4)];
+		const q3 = values[Math.ceil(values.length * (3 / 4))];
+		const iqr = q3 - q1;
+		const maxValue = q3 + iqr * 1.5;
+		const minValue = q1 - iqr * 1.5;
+		return arr.filter((x) => x <= maxValue && x >= minValue);
+	}
+
+	$: chartData = {
 		labels: data.laptimes.map((lap) => lap.number),
-		datasets: data.raceData.Results.map((result) => {
+		datasets: data.raceData.Results.slice(0, selectedOption).map((result) => {
 			const color = generateRandomRGBA('1');
 			return {
 				label: result.Driver.givenName + ' ' + result.Driver.familyName,
-				data: result.laptimes,
+				data: removeOutliersSelected ? removeOutliers(result.laptimes) : result.laptimes,
 				backgroundColor: color,
 				borderColor: color,
 				borderWidth: 1,
@@ -68,6 +100,27 @@
 	</div>
 	<div>
 		<p class="mb-2 text-center">Lap times</p>
-		<LaptimesChart data={chartData} />
+		<div class="flex gap-4">
+			<div class="w-[80%]">
+				<LaptimesChart data={chartData} />
+			</div>
+			<div>
+				<p class="mb-2">Options</p>
+				<div class="flex flex-col gap-2">
+					<div class="flex gap-2">
+						<label for="select">Select number of drivers</label>
+						<select id="select" bind:value={selectedOption} class="form-select">
+							{#each options as option}
+								<option value={option.value}>{option.label}</option>
+							{/each}
+						</select>
+					</div>
+					<div class="flex gap-2">
+						<label for="outliers">Remove outliers</label>
+						<input id="outliers" type="checkbox" bind:checked={removeOutliersSelected} />
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

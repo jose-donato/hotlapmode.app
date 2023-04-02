@@ -1,7 +1,6 @@
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ params }) => {
-	console.log('ai caramba');
 	const year = params.year;
 	const race = params.race;
 	const res = await fetch(`https://ergast.com/api/f1/${year}/${race}/results.json`);
