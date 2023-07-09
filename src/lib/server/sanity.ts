@@ -3,12 +3,14 @@ import { createClient } from '@sanity/client';
 const client = createClient({
 	projectId: 'dsqzfavz',
 	dataset: 'production',
-	useCdn: false,
+	useCdn: true,
 	apiVersion: '2023-07-05'
 });
 
 export async function getThreads() {
-	const sanityThreads = await client.fetch(`*[_type == "thread" && status=="published"] | order(_createdAt desc)`);
+	const sanityThreads = await client.fetch(
+		`*[_type == "thread" && status=="published"] | order(_createdAt desc)`
+	);
 
 	return sanityThreads;
 }
