@@ -1,4 +1,4 @@
-import { getThread } from '$lib/server/directus';
+import { getThread } from '$lib/server/sanity';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 

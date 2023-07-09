@@ -12,16 +12,17 @@ export const load = (async ({ params }) => {
 	const doc = await authenticateSheet(env.SPREADSHEET_ID_2023);
 	const driversSheet = doc.sheetsByTitle['Driver Details'];
 	const drivers = await getSheetData(driversSheet);
-
 	const qualiSheet = doc.sheetsByTitle['(1) Quali In Detail'];
 	const quali = await getSheetData(qualiSheet);
 	const raceSheet = doc.sheetsByTitle['(1) Race In Detail'];
 	const race = await getSheetData(raceSheet);
 
-	const h2hSheet = doc.sheetsByTitle['H2H'];
-	const h2h = await getSheetData(h2hSheet);
+	//const h2hSheet = doc.sheetsByTitle['H2H'];
+	//console.log(h2hSheet);
+	//error here in 2023
+	//const h2h = await getSheetData(h2hSheet);
 
-	const h2hData = transformH2HArr(h2h.values);
+	//const h2hData = transformH2HArr(h2h.values);
 
 	const driverStandings = await getDriverStandings(2023, 1);
 
@@ -39,8 +40,8 @@ export const load = (async ({ params }) => {
 	const data = {
 		drivers,
 		quali,
-		race,
-		h2h: h2hData
+		race
+		//h2h: h2hData
 	};
 	cache.set('data-2023', data);
 	return data;

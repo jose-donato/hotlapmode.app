@@ -1,4 +1,4 @@
-import { getThreads } from '$lib/server/directus';
+import { getThreads } from '$lib/server/sanity';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ params }) => {
